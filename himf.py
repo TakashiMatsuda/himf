@@ -36,7 +36,7 @@ print val
 model = RSVD.train(20, train, dims, probeArray=val, learnRate=0.0005, regularization=0.005)
 
 sqerr = 0.0
-#TODO: Edit below
+
 for strainID, serumID, rating in test:
     err = rating - model(strainID, serumID)
     sqerr += err * err
