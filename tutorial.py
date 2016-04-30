@@ -8,6 +8,7 @@ import numpy as np
 from rsvd import MovieLensDataset
 dataset = MovieLensDataset.loadDat('./ratings.dat')
 ratings=dataset.ratings()
+print ratings
 
 # make sure that the ratings a properly shuffled
 np.random.shuffle(ratings)
@@ -23,6 +24,9 @@ train = train[:v]
 
 from rsvd import RSVD
 dims = (dataset.movieIDs().shape[0], dataset.userIDs().shape[0])
+print dims
+print train
+print val
 model = RSVD.train(20, train, dims, probeArray=val,
                    learnRate=0.0005, regularization=0.005)
 

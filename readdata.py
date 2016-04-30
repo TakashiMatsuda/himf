@@ -47,8 +47,7 @@ def readHIdata(filename, strainindex):
                                  strainindex[parse[4]],
                                  math.log(float(parse[6]), 2)))
 
-    print mold_hiarray
-    return np.array(mold_hiarray)
+    return np.array(mold_hiarray, dtype=np.dtype("H,I,f4"))
 
 
 def test_readindex():
