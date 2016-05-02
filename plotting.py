@@ -5,11 +5,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def mfdata(dn):
-    return 0
-
 sns.set()
-mfdata = readmfdata('./experiment')
+mfdata = np.load('avgary.npy')
+print(mfdata)
 fig, ax = plt.subplots()
-ax = sns.heatmap(data)
+cmap = sns.cubehelix_palette(as_cmap=True, light=.9)
+ax = sns.heatmap(mfdata, cmap=cmap)
 fig.savefig('param-rmse.pdf')

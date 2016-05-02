@@ -38,13 +38,19 @@ def himf(LATENTDIM, REG):
 
     sqerr = 0.0
 
+    reslist = []
     for strainID, serumID, rating in test:
         err = rating - model(strainID, serumID)
+        reslist.append([rating, model(strainID, serumID)])
         sqerr += err * err
     sqerr /= test.shape[0]
+    print np.array(reslist)
+    np.save('bestparam-res.npy', np.array(reslist))
+    """
     f = open('./experiment/rmse-ldim-{0}-reg-{1}'.format(LATENTDIM, REG), 'a')
     f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
     f.close()
+    """
     print "Test RMSE: ", np.sqrt(sqerr)
 
 

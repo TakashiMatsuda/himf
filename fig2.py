@@ -1,15 +1,19 @@
 #!/usr/bin/python
 
+import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def readvsdata():
-    return 0
-
-
 sns.set()
-vsdata = readvsdata()
+vsdata = np.load('bestparam-res.npy')
+print vsdata
+xlist = []
+ylist = []
+for i, elem in enumerate(vsdata):
+    xlist.append(vsdata[i][0])
+    ylist.append(vsdata[i][1])
 fig, ax = plt.subplots()
-ax = sns.regplot(vsdata[0], vsdata[1])
-fig.savefig('bestparam-res.pdf')
+x, y = vsdata.T
+ax = sns.regplot(x=x, y=y)
+fig.savefig('bestparam-plot.pdf')
