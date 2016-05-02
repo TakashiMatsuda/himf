@@ -9,36 +9,45 @@
 
 import numpy as np
 import readdata
+import sys
 
-fn_index = '../H3N2_HIdata/H3N2_integrated_/H3N2_seq_data.csv'
-fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
-strainindex = readdata.readindex(fn_index)
-ratings = readdata.readHIdata(fn_hi, strainindex)
-print ratings
 
-# make sure that the ratings a properly shuffled
-np.random.shuffle(ratings)
+def himf(LATENTDIM, REG):
+    fn_index = '../H3N2_HIdata/H3N2_integrated_/H3N2_seq_data.csv'
+    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
+    strainindex = readdata.readindex(fn_index)
+    ratings = readdata.readHIdata(fn_hi, strainindex)
+    print ratings
 
-# create train, validation and test sets.
-n = int(ratings.shape[0]*0.8)
-train = ratings[:n]
-test = ratings[n:]
-v = int(train.shape[0]*0.9)
-# split train to 1(validate) : 9(training)
-val = train[v:]
-train = train[:v]
+    # make sure that the ratings a properly shuffled
+    np.random.shuffle(ratings)
 
-from rsvd import RSVD
-dims = (len(strainindex), len(strainindex))
-print dims
-print train
-print val
-model = RSVD.train(20, train, dims, probeArray=val, learnRate=0.0005, regularization=0.005)
+    # create train, validation and test sets.
+    n = int(ratings.shape[0]*0.8)
+    train = ratings[:n]
+    test = ratings[n:]
+    v = int(train.shape[0]*0.9)
+    # split train to 1(validate) : 9(training)
+    val = train[v:]
+    train = train[:v]
 
-sqerr = 0.0
+    from rsvd import RSVD
+    dims = (len(strainindex), len(strainindex))
 
-for strainID, serumID, rating in test:
-    err = rating - model(strainID, serumID)
-    sqerr += err * err
-sqerr /= test.shape[0]
-print "Test RMSE: ", np.sqrt(sqerr)
+    model = RSVD.train(LATENTDIM, train, dims, probeArray=val, learnRate=0.0005, regularization=REG)
+
+    sqerr = 0.0
+
+    for strainID, serumID, rating in test:
+        err = rating - model(strainID, serumID)
+        sqerr += err * err
+    sqerr /= test.shape[0]
+    f = open('./experiment/rmse-ldim-{0}-reg-{1}'.format(LATENTDIM, REG), 'a')
+    f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
+    f.close()
+    print "Test RMSE: ", np.sqrt(sqerr)
+
+
+if __name__ == '__main__':
+    print 'sys.argv[1]: {0}'.format(sys.argv[1])
+    himf(int(sys.argv[1]), float(sys.argv[2]))

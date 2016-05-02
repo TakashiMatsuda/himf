@@ -17,6 +17,7 @@ def readindex(filename):
             continue
         strain_index.update({line.split(',')[0]: cnt-1})
 
+    f_dic.close()
     return strain_index
 
 
@@ -47,6 +48,7 @@ def readHIdata(filename, strainindex):
                                  strainindex[parse[4]],
                                  math.log(float(parse[6]), 2)))
 
+    f_hi.close()
     return np.array(mold_hiarray, dtype=np.dtype("H,I,f4"))
 
 
