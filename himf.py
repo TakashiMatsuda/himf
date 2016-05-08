@@ -49,7 +49,7 @@ def himf(LATENTDIM, REG):
 #    print np.array(reslist)
 #    np.save('bestparam-res.npy', np.array(reslist))
 
-    f = open('./experiment3/rmse-ldim-{0}-reg-{1}'.format(LATENTDIM, REG), 'a')
+    f = open('./experiment4/rmse-ldim-{0}-reg-{1}'.format(LATENTDIM, REG), 'a')
     f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
     f.close()
 
