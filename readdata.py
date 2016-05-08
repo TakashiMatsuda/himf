@@ -21,16 +21,60 @@ def readindex(filename):
     return strain_index
 
 
-def readHIdata(filename, strainindex):
+def readserumindex(filename):
+    """
+    return the dictionary such as
+    {serumstrain:index}
+    filename: the name of the strain list file
+    """
+    f_dic = open(filename)
+    strain_index = dict()
+    idcnt = 0
+    for cnt, line in enumerate(f_dic):
+        if cnt == 0:
+            continue
+        elif line.split(',')[4] not in strain_index:
+            strain_index.update({line.split(',')[4]: idcnt})
+            idcnt += 1
+
+    f_dic.close()
+    return strain_index
+
+
+def readvirusindex(filename):
+    """
+    return the dictionary such as
+    {serumstrain:index}
+    filename: the name of the strain list file
+    """
+    f_dic = open(filename)
+    strain_index = dict()
+    idcnt = 0
+    for cnt, line in enumerate(f_dic):
+        if cnt == 0:
+            continue
+        elif line.split(',')[1] not in strain_index:
+            strain_index.update({line.split(',')[1]: idcnt})
+            idcnt += 1
+
+    f_dic.close()
+    return strain_index
+
+
+def readHIdata(filename):
     """
     return ndarray whose elements are tuples as follows
     (StrainID, SerumID, HIvalue)
     the type is
     (uint4, uint4, f4)
     """
-
-    lenfhi = sum(1 for line in open(filename))
+    # lenfhi: the number of entries
+#    lenfhi = sum(1 for line in open(filename))
+    # h_hi: datafile
+    serumindex = readserumindex(filename)
+    virusindex = readvirusindex(filename)
     f_hi = open(filename)
+    # mold_hiarray: each element is
     mold_hiarray = []
     for cnt, line in enumerate(f_hi):
         if cnt == 0:
@@ -41,15 +85,16 @@ def readHIdata(filename, strainindex):
         # into calculation
         if parse[6][0] == '<':
             continue
-        elif parse[1] not in strainindex or parse[4] not in strainindex:
-            continue
+#        elif parse[1] not in strainindex or parse[4] not in strainindex:
+#            continue
         else:
-            mold_hiarray.append((strainindex[parse[1]],
-                                 strainindex[parse[4]],
+            mold_hiarray.append((virusindex[parse[1]],
+                                 serumindex[parse[4]],
                                  math.log(float(parse[6]), 2)))
 
     f_hi.close()
-    return np.array(mold_hiarray, dtype=np.dtype("H,I,f4"))
+    res = np.array(mold_hiarray, dtype=np.dtype("H,I,f4"))
+    return res
 
 
 def test_readindex():
@@ -58,8 +103,17 @@ def test_readindex():
     assert res['A/Akita/4/1993'] == 0
 
 
+def test_readvirusindex():
+    filename = "../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv"
+    res = readvirusindex(filename)
+    assert res['A/Wisconsin/67/2005'] == 0
+
+
+
 def test_readHIdata():
     filename = "../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv"
     strainindex = readindex("../H3N2_HIdata/H3N2_integrated_/H3N2_seq_data.csv")
-    res = readHIdata(filename, strainindex)
-    assert (strainindex['A/Wisconsin/67/2005'], strainindex['A/Wisconsin/67/2005'], math.log(5120, 2)) in res
+    serumindex = readserumindex("../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv")
+    virusindex = readvirusindex("../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv")
+    res = readHIdata(filename)
+    assert (virusindex['A/Wisconsin/67/2005'], serumindex['A/Wisconsin/67/2005'], math.log(5120.0, 2)) in res

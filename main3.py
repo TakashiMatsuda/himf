@@ -9,7 +9,7 @@ import subprocess as sbp
 
 if __name__ == '__main__':
     for cnt in xrange(1, 30):
-        for latentdim in xrange(1, 12, 3):
+        for latentdim in xrange(24, 36, 3):
             for reg in xrange(1, 300, 10):
                 # TODO: make subprocess, so this area should move out of this file
                 # subprocess.call()
