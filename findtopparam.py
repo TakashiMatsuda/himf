@@ -12,17 +12,17 @@ for latentdim in xrange(1, 12, 3):
         s = 0.
         cnt = 0
         try:
-            f = open('./experiment3/rmse-ldim-{0}-reg-{1}'.format(latentdim, reg/1000.0), 'r')
+            f = open('./experiment4/rmse-ldim-{0}-reg-{1}'.format(latentdim, reg/1000.0), 'r')
             print f
         except IOError:
-            pass
+            avg = float('inf')
         else:
             for line in f:
                 if line.split()[2] != 'nan':
                     cnt = cnt + 1
                     s = s + float(line.split()[2])
 
-            if cnt == 0:
+            if cnt == 0 or s == 0.:
                 avg = float('inf')
             else:
                 avg = s / cnt
@@ -30,11 +30,12 @@ for latentdim in xrange(1, 12, 3):
                     mn = avg
                     mnparam[0] = latentdim
                     mnparam[1] = reg/1000.
-
-            print avg
-            avgarray[lat_cnt][(reg/3)-1] = avg
             f.close()
+
+        avgarray[lat_cnt][(reg/3)-1] = avg
+        print avg
     lat_cnt += 1
+
 
 for latentdim in xrange(12, 24, 3):
     for reg in xrange(1, 300, 3):
@@ -94,6 +95,7 @@ for latentdim in xrange(24, 36, 3):
             f.close()
     lat_cnt += 1
 
-np.save('avgary-3.npy', avgarray)
+
+np.save('avgary-4.npy', avgarray)
 
 print mnparam
