@@ -12,14 +12,20 @@ import readdata
 import sys
 
 
-def himf(LATENTDIM, REG):
+def randomizedata():
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
-    virusindex = readdata.readvirusindex(fn_hi)
-    serumindex = readdata.readserumindex(fn_hi)
     ratings = readdata.readHIdata(fn_hi)
 
     # make sure that the ratings a properly shuffled
     np.random.shuffle(ratings)
+    np.save('ratings.npy', ratings)
+
+
+def _himf(LATENTDIM, REG):
+    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
+    virusindex = readdata.readvirusindex(fn_hi)
+    serumindex = readdata.readserumindex(fn_hi)
+    ratings = np.load('ratings.npy')
 
     # create train, validation and test sets.
     n = int(ratings.shape[0]*0.8)
@@ -36,7 +42,8 @@ def himf(LATENTDIM, REG):
     """
         get the average score
     """
-    model = RSVD.train(LATENTDIM, train, dims, probeArray=val, learnRate=0.0005, regularization=REG)
+    model = RSVD.train(LATENTDIM, train, dims, probeArray=val,
+                       learnRate=0.0005, regularization=REG)
 
     sqerr = 0.0
 
@@ -49,7 +56,7 @@ def himf(LATENTDIM, REG):
 #    print np.array(reslist)
 #    np.save('bestparam-res.npy', np.array(reslist))
 
-    f = open('./experiment4/rmse-ldim-{0}-reg-{1}'.format(LATENTDIM, REG), 'a')
+    f = open('./experiment5/rmse-ldim-{0}-reg-{1}'.format(LATENTDIM, REG), 'a')
     f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
     f.close()
 
@@ -58,4 +65,4 @@ def himf(LATENTDIM, REG):
 
 if __name__ == '__main__':
 #    print 'sys.argv[1]: {0}'.format(sys.argv[1])
-    himf(int(sys.argv[1]), float(sys.argv[2]))
+    _himf(int(sys.argv[1]), float(sys.argv[2]))
