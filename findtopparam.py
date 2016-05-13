@@ -2,17 +2,17 @@
 
 import numpy as np
 
-rmselist = [[0 for x in xrange(12)] for y in xrange(100)]
+rmselist = [[0 for x in xrange(4)] for y in xrange(6)]
 mn = 100.
 mnparam = [0 for x in xrange(2)]
-avgarray = np.zeros((12, 100))
+avgarray = np.zeros((4, 6))
 lat_cnt = 0
-for latentdim in xrange(1, 12, 3):
-    for reg in xrange(1, 300, 3):
+for latentdim in xrange(1, 40, 10):
+    for reg in xrange(1, 300, 50):
         s = 0.
         cnt = 0
         try:
-            f = open('./experiment4/rmse-ldim-{0}-reg-{1}'.format(latentdim, reg/1000.0), 'r')
+            f = open('./experiment5/rmse-ldim-{0}-reg-{1}'.format(latentdim, reg/1000.0), 'r')
             print f
         except IOError:
             avg = float('inf')
@@ -36,7 +36,7 @@ for latentdim in xrange(1, 12, 3):
         print avg
     lat_cnt += 1
 
-
+"""
 for latentdim in xrange(12, 24, 3):
     for reg in xrange(1, 300, 3):
         s = 0.
@@ -94,8 +94,8 @@ for latentdim in xrange(24, 36, 3):
             avgarray[lat_cnt][(reg/3)-1] = avg
             f.close()
     lat_cnt += 1
+"""
 
-
-np.save('avgary-4.npy', avgarray)
+np.save('avgary-5.npy', avgarray)
 
 print mnparam

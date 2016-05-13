@@ -6,7 +6,7 @@ import seaborn as sns
 
 
 sns.set()
-mfdata = np.load('avgary-3.npy')
+mfdata = np.load('avgary-5.npy')
 print(mfdata)
 
 fig, ax = plt.subplots()
@@ -19,4 +19,4 @@ ax = sns.heatmap(mfdata, cmap='bwr', vmin=1.3, vmax=1.8,
 plt.title('RMSE By Parameter', fontsize=20)
 plt.xlabel(u'\u03bb', fontsize=24)
 plt.ylabel("k", fontsize=24)
-fig.savefig('param-rmse-4-rb.pdf')
+fig.savefig('param-rmse-5-rb.pdf')
