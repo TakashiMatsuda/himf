@@ -10,6 +10,7 @@
 import numpy as np
 import readdata
 import sys
+import simseq
 
 
 def randomizedata():
@@ -58,7 +59,10 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM):
 #    print np.array(reslist)
 #    np.save('bestparam-res.npy', np.array(reslist))
 
+
 def _himf(LATENTDIM, REG, EXPERIMENTNUM):
+    """
+    """
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
     virusindex = readdata.readvirusindex(fn_hi)
     serumindex = readdata.readserumindex(fn_hi)
@@ -81,7 +85,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
         NMF
     """
     model = RSVD.train(LATENTDIM, train, dims, probeArray=val,
-                       learnRate=0.0005, regularization=REG, nmfflag=True)
+                       learnRate=0.0005, regularization=REG, nmfflag=False)
 
     sqerr = 0.0
 

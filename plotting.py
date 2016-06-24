@@ -12,7 +12,7 @@ print(mfdata)
 
 fig, ax = plt.subplots()
 xl = [str(x/1000.0)for x in range(params[4], params[5], params[6])]
-ax = sns.heatmap(mfdata, cmap='YlGnBu', vmin=1.5, vmax=1.8,
+ax = sns.heatmap(mfdata, cmap='YlGnBu', vmin=1.1, vmax=1.8,
                  xticklabels=xl,
                  yticklabels=range(params[1], params[2], params[3]))
 plt.title('RMSE By Parameter', fontsize=20)
