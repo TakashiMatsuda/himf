@@ -1,17 +1,18 @@
 #!/Users/takashi/.pyenv/shims/python
 
 import re
+import readdata
 
 
 def simseq(fn, idx):
     """
     Return : Numpy.ndarray(2d)
     File x Index -> Alignment Score Matrix
-    idx : dict, (ID : NCBI strain name)
+    idx : dict, (NCBI strain name : ID)
     fn : File Object pointing the fasta file
     """
-    rvslist = [[x[1], x[0]] for x in idx.items()]
-    rvsdict = dict(rvslist)
+#    rvslist = [[x[1], x[0]] for x in idx.items()]
+#    rvsdict = dict(rvslist)
 
     nameline = re.compile('^>')
     seqname = ""
@@ -26,9 +27,18 @@ def simseq(fn, idx):
                 rvsdict : (NCBI strain name : ordinalnumber)
                 seqdict : (ordinalnumber : Sequence)
                 """
-                seqdict.update({rvsdict[seqname]: seq})
+                seqdict.update({idx[seqname]: seq})
                 seq = ""
             seqname = line
         else:
             seq.append(line)
     return seqdict
+
+
+def test_simseq():
+    """
+    not yet implemented
+    """
+    fn = open("./test.fa")
+    idx = readdata.readvirusindex('../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv')
+    res = simseq(fn, idx)
