@@ -3,6 +3,10 @@
 import re
 import readdata
 import numpy as np
+from Bio.Emboss.Applications import NeedleCommandline
+from Bio import AlignIO
+
+
 
 def _dicseq(fn, idx):
     """
@@ -36,11 +40,39 @@ def _dicseq(fn, idx):
     return seqdict
 
 
-def similarity(seq, seq):
+def parse_getscore(fn):
     """
-    Not yet implemented
+    not yet implemented
     """
     return 0
+
+
+def similarity(x, y):
+    """
+    Not yet implemented
+    Return: The Alignment score between x and y, those are amino acid sequences
+    """
+    """
+    NeedleCommandline (due to the design of 'needle') needs
+    the fasta sequence file.
+    It doesn't accept the string.
+    I create new files for each x and y sequence that are in the file.
+    """
+    f_x = open(".simseq_x.fa", 'w')
+    f_x.write(">x\n{}".format(x))
+    f_x.close()
+    f_y = open(".simseq_y.fa", 'w')
+    f_y.write(">y\n{}".format(y))
+    f_y.close()
+
+    needle_cline = NeedleCommandline(asequence=".simseq_x.fa",
+                                     bsequence=".simseq_y.fa",
+                                     gapopen=10,
+                                     gapextend=0.5,
+                                     outfile=".simseq_needle.txt",
+                                     auto=True)
+    needle_cline()
+    return parse_getscore(".simseq_needle.txt")
 
 
 def simseq(idx, fn):
@@ -52,12 +84,12 @@ def simseq(idx, fn):
     """
     dicseq = _dicseq(fn, idx)
     m = len(dicseq)
-    ##### TODO: Check the grammar below
+    # TODO: Check the grammar below
     alnmtx = np.array((m, m))
     for i in xrange(m):
         for j in xrange(m):
             alnmtx[i][j] = similarity(dicseq[i], dicseq[j])
-    ##### END*TODO
+    # END*TODO
     return alnmtx
 
 
