@@ -42,9 +42,17 @@ def _dicseq(fn, idx):
 
 def parse_getscore(fn):
     """
-    not yet implemented
+    Returns alignment score
+    in 'fn' file.
+    fn: (string) Filename of the alignment result file
     """
-    return 0
+    f = open(fn)
+    scorepattern = re.compile("Score")
+    for line in f:
+        if scorepattern.search(line):
+            score = line.split(' ')[-1]
+
+    return score
 
 
 def similarity(x, y):
