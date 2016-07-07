@@ -51,13 +51,12 @@ def parse_getscore(fn):
     for line in f:
         if scorepattern.search(line):
             score = line.split(' ')[-1]
-
+    f.close()
     return score
 
 
 def similarity(x, y):
     """
-    Not yet implemented
     Return: The Alignment score between x and y, those are amino acid sequences
     """
     """
