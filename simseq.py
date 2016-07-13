@@ -122,12 +122,10 @@ def test_dicseq():
 
 def test_simseq():
     """
-    simseq is working, but stops
-    because the dataset is not correct.
+    passed some simple tests
     """
     f = open("./test.fa")
     idx = readdata.readvirusindex('./test_HI.csv')
     res = simseq(idx, f)
     f.close()
     print(res)
-    assert 0
