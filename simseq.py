@@ -4,39 +4,43 @@ import re
 import readdata
 import numpy as np
 from Bio.Emboss.Applications import NeedleCommandline
-from Bio import AlignIO
 
 
-
-def _dicseq(fn, idx):
+def _dicseq(f, idx):
     """
     Return : dictionary[ordinalnumber : sequence]
     File x (Index -> strainname) -> (Index -> Sequence)
     idx : dict, (NCBI strain name : ID)
-    fn : File Object pointing the fasta file
+    f : File Object pointing the fasta file
     """
 #    rvslist = [[x[1], x[0]] for x in idx.items()]
 #    rvsdict = dict(rvslist)
-
     nameline = re.compile('^>')
     seqname = ""
     seq = ""
+    tmp = ""
     seqdict = dict()
-    for line in fn:
+    seqflag = False
+    for line in f:
         if nameline.match(line):
-            if not seqname == "":
+            if seqflag:
                 """
                 seqname : NCBI strain name
                 idx : (ordinalnumber : NCBI strain name)
                 rvsdict : (NCBI strain name : ordinalnumber)
-                seqdict : (ordinalnumber : Sequence)
+                 seqdict : (ordinalnumber : Sequence)
                 """
-                seqdict.update({idx[seqname]: seq})
+                seqdict.update({idx[tmp]: seq})
                 seq = ""
-            seqname = line
+            tmp = line[1:-1]
         else:
-            seq.append(line)
-
+            if line[-1] == '\n':
+                seq = seq + line[:-1]
+            else:
+                seq = seq + line[:]
+            if not seqflag:
+                seqflag = True
+    seqdict.update({idx[tmp]: seq})
     return seqdict
 
 
@@ -52,7 +56,7 @@ def parse_getscore(fn):
         if scorepattern.search(line):
             score = line.split(' ')[-1]
     f.close()
-    return score
+    return float(score)
 
 
 def similarity(x, y):
@@ -82,28 +86,48 @@ def similarity(x, y):
     return parse_getscore(".simseq_needle.txt")
 
 
-def simseq(idx, fn):
+def simseq(idx, f):
     """
     Return : Numpy.ndarray(2d)
     File x Index -> Alignment Score Matrix
     idx : dict, (NCBI strain name : ID)
-    fn : File Object pointing the fasta file
+    f : File Object pointing the fasta file
     """
-    dicseq = _dicseq(fn, idx)
+    dicseq = _dicseq(f, idx)
     m = len(dicseq)
-    # TODO: Check the grammar below
-    alnmtx = np.array((m, m))
+    alnmtx = np.zeros((m, m))
+    # TODO: The equation below is wrong to the syntax.
+    # dicseq[i] <<< i must be the key of dicseq.
+    revs_idx = {v: k for k, v in idx.items()}
+    revs_dicseq = {v: k for k, v in dicseq.items()}
     for i in xrange(m):
         for j in xrange(m):
             alnmtx[i][j] = similarity(dicseq[i], dicseq[j])
-    # END*TODO
     return alnmtx
+
+
+def test_parse_getscore():
+    res = parse_getscore("../needle.txt")
+    assert res == 2789.0
+
+
+def test_dicseq():
+    idx = readdata.readvirusindex('./test_HI.csv')
+    print idx
+    dicseq = _dicseq(open("test3.fa"), readdata.readvirusindex('./test_HI.csv'))
+    print dicseq
+    print dicseq[0]
+    assert dicseq[0] == "MKTIIALSYILCLVFAQKLPGNDNSTATLCLGHHAVPNGTIVKTITNDQIEVTNATELVQSSSTGEICDSPHQILDGENCTLIDALLGDPQCDGFQNKKWDLFVERSKAYSNCYPYDVPDYASLRSLVASSGTLEFNNESFNWTGVTQNGTSSACIRRSNNSFFSRLNWLTHLKFKYPALNVTMPNNEQFDKLYIWGVHHPGTDNDQIFLYAQASGRITVSTKRSQQTVIPNIGSRPRVRNIPSRISIYWTIVKPGDILLINSTGNLIAPRGYFKIRSGKSSIMRSDAPIGKCNSECITPNGSIPNDKPFQNVNRITYGACPRYVKQNTLKLATGMRNVPEKQTRGIFGAIAGFIENGWEGMVDGWYGFRHQNSEGRGQAADLKSTQAAIDQINGKLNRLIGKTNEKFHQIEKEFSEVEGRIQDLEKYVEDTKIDLWSYNAELLVALENQHTIDLTDSEMNKLFEKTKKQLRENAEDMGNGCFKIYHKCDNACIGSIRNGTYDHDVYRDEALNNRFQIKGVELKSGYKDWILWISFAISCFLLCVALLGFIMWACQKGNIRCNICI"
 
 
 def test_simseq():
     """
-    not yet implemented
+    simseq is working, but stops
+    because the dataset is not correct.
     """
-    fn = open("./test.fa")
-    idx = readdata.readvirusindex('../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv')
-    res = simseq(fn, idx)
+    f = open("./test.fa")
+    idx = readdata.readvirusindex('./test_HI.csv')
+    res = simseq(idx, f)
+    f.close()
+    print(res)
+    assert 0
