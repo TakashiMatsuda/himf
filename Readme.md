@@ -2,13 +2,17 @@
 himfを実行。
 himfの実行文は下の文
 
+```
 if __name__ == '__main__':
 \#    print 'sys.argv[1]: {0}'.format(sys.argv[1])
     _himf(int(sys.argv[1]), float(sys.argv[2]), int(sys.argv[3]))
+```
 
 _himfは
-def _himf(LATENTDIM, REG, EXPERIMENTNUM):
 
+```
+def _himf(LATENTDIM, REG, EXPERIMENTNUM):
+```
 
 #実験の流れ
 executeexpreiment.sh -> run.py -> himf.py
