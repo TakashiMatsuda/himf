@@ -49,9 +49,10 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
     """
     fsim = open("./cleanedseq.fa")
     simtx = simseq.simseq(virusindex, fsim)
-    model = RSVD.train(LATENTDIM, train, dims, probeArray=val,
+    model = RSVD.train(LATENTDIM, train, dims, simtx,
+                       probeArray=val,
                        learnRate=0.0005, regularization=REG, nmfflag=True,
-                       gamma=gamma, simtx=simtx)
+                       gamma=gamma)
 
     sqerr = 0.0
 
