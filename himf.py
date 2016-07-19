@@ -11,6 +11,7 @@ import numpy as np
 import readdata
 import sys
 import simseq
+import os
 
 
 def randomizedata():
@@ -93,11 +94,24 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
         get the average score
         NMF
     """
-    print "pre RSVD"
+    """
     fsim = open("../cleanedseq.fa")
     simtx = simseq.simseq(virusindex, fsim)
+    """
+    """
+    Cache date check!
+    """
+    seq_date = os.stat("./realdata.fa").st_mtime
+    simtx_date = os.stat("./simtx.npy").st_mtime
+    if simtx_date <= seq_date:
+        fsim = open("../realdata.fa")
+        print("realdata.fa is renewed.\nupdating simtx.npy..")
+        simtx = simseq.simseq(virusindex, fsim)
+        np.save("simtx.npy", simtx)
+    else:
+        simtx = np.load("simtx.npy")
     model = RSVD.train(LATENTDIM, train, dims, simtx, probeArray=val,
-                       learnRate=0.0005, regularization=REG, nmfflag=False)
+                       learnRate=0.0005, regularization=REG, nmfflag=True)
 
     sqerr = 0.0
 
