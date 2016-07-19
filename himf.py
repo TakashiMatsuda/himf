@@ -36,8 +36,9 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
     # split train to 1(validate) : 9(training)
     val = train[v:]
     train = train[:v]
-
+    print "pre read"
     from rsvd import RSVD
+    print "after read"
     dims = (len(virusindex), len(serumindex))
 
     """
@@ -83,15 +84,19 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
     # split train to 1(validate) : 9(training)
     val = train[v:]
     train = train[:v]
-
+    print "pre read"
     from rsvd import RSVD
+    print "after read"
     dims = (len(virusindex), len(serumindex))
 
     """
         get the average score
         NMF
     """
-    model = RSVD.train(LATENTDIM, train, dims, probeArray=val,
+    print "pre RSVD"
+    fsim = open("../cleanedseq.fa")
+    simtx = simseq.simseq(virusindex, fsim)
+    model = RSVD.train(LATENTDIM, train, dims, simtx, probeArray=val,
                        learnRate=0.0005, regularization=REG, nmfflag=False)
 
     sqerr = 0.0

@@ -17,7 +17,7 @@
 # 正則化の方式
 # 解の探索ステップ
 
-EXPERIMENTNUM=9
+EXPERIMENTNUM=$1
 Kstart=1
 Kfin=25
 Kstep=5
