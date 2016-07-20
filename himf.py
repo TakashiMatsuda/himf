@@ -110,7 +110,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
         simtx = np.load("simtx.npy")
 
     # randseed test
-    for seed in range(1,2):
+    for seed in range(1,100):
         print "seed=",seed
         model = RSVD.train(LATENTDIM, train, dims, simtx,\
                             #probeArray=val,

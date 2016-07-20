@@ -113,10 +113,6 @@ def simseq(idx, f):
     dicseq = _dicseq(f, idx)
     m = len(dicseq)
     alnmtx = np.zeros((m, m))
-    # TODO: The equation below is wrong to the syntax.
-    # dicseq[i] <<< i must be the key of dicseq.
-    revs_idx = {v: k for k, v in idx.items()}
-    revs_dicseq = {v: k for k, v in dicseq.items()}
     for i in xrange(m):
         for j in xrange(m):
             alnmtx[i][j] = similarity(dicseq[i], dicseq[j])
