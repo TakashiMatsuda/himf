@@ -88,7 +88,8 @@ def readHIdata(filename):
 #        elif parse[1] not in strainindex or parse[4] not in strainindex:
 #            continue
         else:
-            mold_hiarray.append((virusindex[parse[1]],
+            # movie is 1 origin!
+            mold_hiarray.append((virusindex[parse[1]]+1,
                                  serumindex[parse[4]],
                                  math.log(float(parse[6]), 2)))
 
