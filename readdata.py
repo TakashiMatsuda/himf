@@ -95,6 +95,7 @@ def readHIdata(filename):
 
     f_hi.close()
     res = np.array(mold_hiarray, dtype=np.dtype("H,I,f4"))
+    print res
     return res
 
 

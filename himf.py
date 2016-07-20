@@ -17,7 +17,6 @@ import os
 def randomizedata():
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
     ratings = readdata.readHIdata(fn_hi)
-
     # make sure that the ratings a properly shuffled
     np.random.shuffle(ratings)
     np.save('ratings.npy', ratings)
@@ -86,9 +85,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
     # split train to 1(validate) : 9(training)
     val = train[v:]
     train = train[:v]
-    print "pre read"
     from rsvd import RSVD
-    print "after read"
     dims = (len(virusindex), len(serumindex))
 
     """
@@ -100,7 +97,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
     simtx = simseq.simseq(virusindex, fsim)
     """
     """
-    Cache date check!
+    Cache date check and get simtx from cache
     """
     seq_date = os.stat("./realdata.fa").st_mtime
     simtx_date = os.stat("./simtx.npy").st_mtime
