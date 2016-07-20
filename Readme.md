@@ -15,6 +15,6 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
 ```
 
 #実験の流れ
-executeexpreiment.sh -> run.py -> himf.py
+executeexpreiment.sh -> main.py -> himf.py
 executeexperiment.sh : 網羅的な実験の為の範囲決め, 実験番号を決める。
 run.py : 実際に各パラメータについてプロセスを立ててhimf.pyを実行する
