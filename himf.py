@@ -51,7 +51,7 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
     fsim = open("./cleanedseq.fa")
     simtx = simseq.simseq(virusindex, fsim)
     model = RSVD.train(LATENTDIM, train, dims, simtx,
-                       #probeArray=val,
+                       probeArray=val,
                        learnRate=0.0005, regularization=REG, nmfflag=True,
                        gamma=gamma)
 
@@ -109,12 +109,9 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
     else:
         simtx = np.load("simtx.npy")
 
-    # randseed test
-    for seed in range(1,100):
-        print "seed=",seed
-        model = RSVD.train(LATENTDIM, train, dims, simtx,\
-                            #probeArray=val,
-                           learnRate=0.0005, regularization=REG, nmfflag=True, randseed=seed)
+    model = RSVD.train(LATENTDIM, train, dims, simtx,\
+                       probeArray=val,
+                       learnRate=0.0005, regularization=REG, nmfflag=True)
 
     sqerr = 0.0
 
