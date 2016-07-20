@@ -86,6 +86,23 @@ def similarity(x, y):
     return parse_getscore(".simseq_needle.txt")
 
 
+def regularizesim(alnmtx, minzero, expflag):
+    """
+    All regularization for alignment matrix are
+    controled in this function.
+    return: regularized alnmtx
+    expflag: Take exponential values of elements in given matrix
+    minzero: All elements are subtracted by amin(alnmtx)
+    At default, the order is as shown below:
+    minzero -> expflag
+    """
+    if minzero:
+        alnmtx = np.subtract(alnmtx, np.amin(alnmtx))
+    if expflag:
+        alnmtx = np.exp(alnmtx)
+    return alnmtx
+
+
 def simseq(idx, f):
     """
     Return : Numpy.ndarray(2d)
@@ -103,6 +120,7 @@ def simseq(idx, f):
     for i in xrange(m):
         for j in xrange(m):
             alnmtx[i][j] = similarity(dicseq[i], dicseq[j])
+    alnmtx = regularizesim(alnmtx, minzero=True, expflag=False)
     return alnmtx
 
 
