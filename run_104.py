@@ -6,7 +6,7 @@ import functools
 import subprocess
 import sys
 
-exp_num = 22
+exp_num = 104
 
 if __name__ == '__main__':
     """
@@ -21,13 +21,13 @@ if __name__ == '__main__':
         sys.exit()
 
     count = 0
-    for count in xrange(100):
+    for count in xrange(1):
         himf.randomizedata()
         print "\r {0} th test running..".format(count)
         for latentdim in [1, 10, 20, 30, 40, 50]:
             for reg in [0., 0.01, 0.1, 0.5, 1]:
                 for nmfflag in [False, True]:
-                    p = Pool(5)
+                    p = Pool(7)
                     maphimf = functools.partial(himf._himf,
                                                 latentdim,
                                                 reg,
@@ -35,5 +35,3 @@ if __name__ == '__main__':
                                                 nmfflag=nmfflag,)
                     result = p.map(maphimf, [0., 0.01, 0.1, 0.5, 1])
                     print "result: ", result
-                    p.close()
-                    p.join()

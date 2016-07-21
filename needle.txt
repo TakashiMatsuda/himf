@@ -1,0 +1,83 @@
+########################################
+# Program: needle
+# Rundate: Tue 19 Jul 2016 22:32:48
+# Commandline: needle
+#    -brief
+#    -outfile needle.txt
+#    -asequence a.fa
+#    -bsequence b.fa
+#    -gapopen 10
+#    -gapextend 0.5
+# Align_format: srspair
+# Report_file: needle.txt
+########################################
+
+#=======================================
+#
+# Aligned_sequences: 2
+# 1: A/Alabama/5/2010
+# 2: A/Akita/4/1993
+# Matrix: EBLOSUM62
+# Gap_penalty: 10.0
+# Extend_penalty: 0.5
+#
+# Length: 566
+# Identity:     323/566 (57.1%)
+# Similarity:   338/566 (59.7%)
+# Gaps:         203/566 (35.9%)
+# Score: 1723.0
+# 
+#
+#=======================================
+
+A/Alabama/5/2      1 MKTIIALSYILCLVFAQKLPGNDNSTATLCLGHHAVPNGTIVKTITNDQI     50
+                     ||||||||||||||||||||||||||||||||||||||||:|||||||||
+A/Akita/4/199      1 MKTIIALSYILCLVFAQKLPGNDNSTATLCLGHHAVPNGTLVKTITNDQI     50
+
+A/Alabama/5/2     51 EVTNATELVQSSSTGEICNSPHQILDGENCTLIDALLGDPQCDGFQNKKW    100
+                     |||||||||||||||.||:|||:||||:||||||||||||.|||||||:|
+A/Akita/4/199     51 EVTNATELVQSSSTGRICDSPHRILDGKNCTLIDALLGDPHCDGFQNKEW    100
+
+A/Alabama/5/2    101 DLFVERSKAHSNCYPYDVPDYASLRSLVASSGTLEFNNESFNWTGVTQNG    150
+                     |||||||||:||||||||||||||||||||||||||.||.||||||.|:|
+A/Akita/4/199    101 DLFVERSKAYSNCYPYDVPDYASLRSLVASSGTLEFINEDFNWTGVAQDG    150
+
+A/Alabama/5/2    151 TSSACIRRSNNSFFSRLNWLTHLNFKYPALNVTMPNNEQFDKLYIWGVHH    200
+                     .|.||.|.|.||||||||||..|.:||||||||||||.:|||||||||||
+A/Akita/4/199    151 GSYACKRGSVNSFFSRLNWLHKLEYKYPALNVTMPNNGKFDKLYIWGVHH    200
+
+A/Alabama/5/2    201 PGTDKDQIFLYAQASGRITVSTKKSQQAVIPNIGSRPRVRDIPSRVSIYW    250
+                     |.||.||..||.:||||:|||||:|||.|||||||||.||..|||:||||
+A/Akita/4/199    201 PSTDSDQTSLYVRASGRVTVSTKRSQQTVIPNIGSRPWVRGQPSRISIYW    250
+
+A/Alabama/5/2    251 TIVKPGDILLINSTGNLIAPRGYFKIRSGKSSIMRSDAPIGKCNSACITP    300
+                     |||||||||||||||||||||||||||:|||||||||||||.|:|.||||
+A/Akita/4/199    251 TIVKPGDILLINSTGNLIAPRGYFKIRNGKSSIMRSDAPIGNCSSECITP    300
+
+A/Alabama/5/2    301 NGSIPNDKPFQNVNRITYGACPRYVKQNTLKLATGMRNVPEKQTRGIFGA    350
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Akita/4/199    301 NGSIPNDKPFQNVNRITYGACPRYVKQNTLKLATGMRNVPEKQTRGIFGA    350
+
+A/Alabama/5/2    351 IAGFIENGWEGMVDGWYGFRHQNSEGRGQAADLKSTQAAIDQINGKLNRL    400
+                     |||||||||||||                                     
+A/Akita/4/199    351 IAGFIENGWEGMV-------------------------------------    363
+
+A/Alabama/5/2    401 IGKTNEKFHQIEKEFSEVEGRIQDLEKYVEDTKIDLWSYNAELLVALENQ    450
+                                                                       
+A/Akita/4/199    363 --------------------------------------------------    363
+
+A/Alabama/5/2    451 HTIDLTDSEMNKLFEKTKKQLRENAEDMGNGCFKIYHKCDNACIGSIRNG    500
+                                                                       
+A/Akita/4/199    363 --------------------------------------------------    363
+
+A/Alabama/5/2    501 TYDHDVYRDEALNNRFQIKGVELKSGYKDWILWISFAISCFLLCVALLGF    550
+                                                                       
+A/Akita/4/199    363 --------------------------------------------------    363
+
+A/Alabama/5/2    551 IMWACQKGNIRCNICI    566
+                                     
+A/Akita/4/199    363 ----------------    363
+
+
+#---------------------------------------
+#---------------------------------------

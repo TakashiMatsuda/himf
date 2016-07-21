@@ -6,7 +6,7 @@ import functools
 import subprocess
 import sys
 
-exp_num = 22
+exp_num = 122
 
 if __name__ == '__main__':
     """
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         sys.exit()
 
     count = 0
-    for count in xrange(100):
+    for count in xrange(1):
         himf.randomizedata()
         print "\r {0} th test running..".format(count)
         for latentdim in [1, 10, 20, 30, 40, 50]:

@@ -6,7 +6,7 @@ import functools
 import subprocess
 import sys
 
-exp_num = 22
+exp_num = 21
 
 if __name__ == '__main__':
     """
@@ -27,13 +27,10 @@ if __name__ == '__main__':
         for latentdim in [1, 10, 20, 30, 40, 50]:
             for reg in [0., 0.01, 0.1, 0.5, 1]:
                 for nmfflag in [False, True]:
-                    p = Pool(5)
                     maphimf = functools.partial(himf._himf,
                                                 latentdim,
                                                 reg,
                                                 exp_num,
                                                 nmfflag=nmfflag,)
-                    result = p.map(maphimf, [0., 0.01, 0.1, 0.5, 1])
+                    result = map(maphimf, [0., 0.01, 0.1, 0.5, 1])
                     print "result: ", result
-                    p.close()
-                    p.join()
