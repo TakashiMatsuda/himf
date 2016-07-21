@@ -17,10 +17,10 @@
 # 正則化の方式
 # 解の探索ステップ
 
-EXPERIMENTNUM=$1
+EXPERIMENTNUM=$11
 Kstart=1
-Kfin=25
-Kstep=5
+Kfin=51
+Kstep=10
 LMstart=1
 LMfin=300
 LMstep=50

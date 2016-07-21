@@ -66,7 +66,8 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
 #    np.save('bestparam-res.npy', np.array(reslist))
 """
 
-def _himf(LATENTDIM, REG, EXPERIMENTNUM, nmfflag=None, gamma=0.):
+
+def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
     """
     """
     print "himf"
@@ -109,7 +110,10 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, nmfflag=None, gamma=0.):
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val,
-                       learnRate=0.0005, regularization=REG, nmfflag=nmfflag, gamma=gamma)
+                       learnRate=0.0005,
+                       regularization=REG,
+                       nmfflag=nmfflag,
+                       gamma=gamma)
 
     sqerr = 0.0
 
@@ -133,19 +137,23 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, nmfflag=None, gamma=0.):
     rmsepath = rmsepath + "-gamma-{0}".format(gamma)
     modelpath = modelpath + "/"
 
-    print os.path.dirname(modelpath)
+
     if not os.path.exists(os.path.dirname(modelpath)):
         try:
             os.makedirs(os.path.dirname(modelpath))
+            model.save(modelpath)
         except OSError as exc:
             if exc.errno != errno.EEXIST:
                 raise
-    model.save(modelpath)
+
     f = open(rmsepath, 'a+')
     f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
     f.close()
 
+    return 0
+
 
 if __name__ == '__main__':
-#    print 'sys.argv[1]: {0}'.format(sys.argv[1])
-    _himf(int(sys.argv[1]), float(sys.argv[2]), int(sys.argv[3]))
+    _himf(int(sys.argv[1]), float(sys.argv[2]),
+          int(sys.argv[3]), nmfflag=int(sys.argv[4],
+          gamma=int(sys.argv[5])))
