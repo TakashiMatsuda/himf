@@ -4,6 +4,7 @@ import re
 import readdata
 import numpy as np
 from Bio.Emboss.Applications import NeedleCommandline
+import scipy as sp
 
 
 def _dicseq(f, idx):
@@ -86,7 +87,7 @@ def similarity(x, y):
     return parse_getscore(".simseq_needle.txt")
 
 
-def regularizesim(alnmtx, minzero, expflag):
+def regularizesim(alnmtx, normalflag, expflag):
     """
     All regularization for alignment matrix are
     controled in this function.
@@ -96,8 +97,8 @@ def regularizesim(alnmtx, minzero, expflag):
     At default, the order is as shown below:
     minzero -> expflag
     """
-    if minzero:
-        alnmtx = np.subtract(alnmtx, np.amin(alnmtx))
+    if normalflag:
+        alnmtx = sp.stats.zscore(alnmtx, axis=None)
     if expflag:
         alnmtx = np.exp(alnmtx)
     return alnmtx

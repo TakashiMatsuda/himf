@@ -68,8 +68,7 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
 
 
 def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
-    """
-    """
+
     print "himf"
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
     virusindex = readdata.readvirusindex(fn_hi)
@@ -102,14 +101,15 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
     simtx_date = os.stat("./simtx.npy").st_mtime
     if simtx_date <= seq_date:
         fsim = open("../realdata.fa")
-        print("realdata.fa is renewed.\nupdating simtx.npy..")
+        print("realdata.fa is renewed. updating simtx.npy..")
         simtx = simseq.simseq(virusindex, fsim)
         np.save("simtx.npy", simtx)
     else:
         simtx = np.load("simtx.npy")
 
+# CAUTION: probeArray is off temporarily
     model = RSVD.train(LATENTDIM, train, dims, simtx,
-                       probeArray=val,
+                       probeArray=None,
                        learnRate=0.0005,
                        regularization=REG,
                        nmfflag=nmfflag,
@@ -147,6 +147,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
                 raise
 
     f = open(rmsepath, 'a+')
+    print "Test RMSE: {0}\n".format(np.sqrt(sqerr))
     f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
     f.close()
 

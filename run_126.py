@@ -1,5 +1,4 @@
 #!/Users/takashi/.pyenv/shims/python
-# -*- coding:utf-8 -*-
 
 import himf
 from multiprocessing import Pool
@@ -7,11 +6,7 @@ import functools
 import subprocess
 import sys
 
-exp_num = 27
-"""
-probearray = None
-配列による正則化のはんか性能を確認するための実験
-"""
+exp_num = 126
 
 if __name__ == '__main__':
     """
@@ -25,20 +20,21 @@ if __name__ == '__main__':
         print "INITIALIZATION ERROR"
         sys.exit()
 
-    klist = [1, 10, 20, 30, 40, 50]
-
-    reglist = [0., 0.01, 0.1, 0.5, 1]
-    nmflist = [False, True]
-    gammalist = [0., 0.01, 0.1, 0.5, 1]
+#    klist = [1, 10, 20, 30, 40, 50]
+    klist = [10]
+#    reglist = [0., 0.01, 0.1, 0.5, 1]
+    reglist = [0.01]
+    nmflist = [True]
+    gammalist = [0., 0.01, 0.1, 0.5, 1, 2]
 
     count = 0
-    for count in xrange(100):
+    for count in xrange(1):
         himf.randomizedata()
         print "\r {0} th test running..".format(count)
         for latentdim in klist:
             for reg in reglist:
                 for nmfflag in nmflist:
-                    p = Pool(5)
+                    p = Pool(1)
                     maphimf = functools.partial(himf._himf,
                                                 latentdim,
                                                 reg,

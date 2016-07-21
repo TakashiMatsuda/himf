@@ -1,5 +1,4 @@
 #!/Users/takashi/.pyenv/shims/python
-# -*- coding:utf-8 -*-
 
 import himf
 from multiprocessing import Pool
@@ -7,11 +6,12 @@ import functools
 import subprocess
 import sys
 
-exp_num = 27
-"""
-probearray = None
-配列による正則化のはんか性能を確認するための実験
-"""
+exp_num = 26
+klist = [1, 10, 20, 30, 40, 50]
+reglist = [0., 0.01, 0.1, 0.5, 1]
+nmflist = [False, True]
+gammalist = [0., 0.01, 0.1, 0.5, 1, 2]
+
 
 if __name__ == '__main__':
     """
@@ -26,10 +26,9 @@ if __name__ == '__main__':
         sys.exit()
 
     klist = [1, 10, 20, 30, 40, 50]
-
     reglist = [0., 0.01, 0.1, 0.5, 1]
     nmflist = [False, True]
-    gammalist = [0., 0.01, 0.1, 0.5, 1]
+    gammalist = [0., 0.01, 0.1, 0.5, 1, 2]
 
     count = 0
     for count in xrange(100):
