@@ -109,7 +109,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
     else:
         simtx = np.load("simtx.npy")
 
-    model = RSVD.train(LATENTDIM, train, dims, simtx,\
+    model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val,
                        learnRate=0.0005, regularization=REG, nmfflag=True)
 
