@@ -21,7 +21,7 @@ def randomizedata():
     np.random.shuffle(ratings)
     np.save('ratings.npy', ratings)
 
-
+"""
 def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
     virusindex = readdata.readvirusindex(fn_hi)
@@ -41,13 +41,11 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
     print "after read"
     dims = (len(virusindex), len(serumindex))
 
-    """
-        get the average score
-        NMF
-    """
-    """
-        get the similarity score
-    """
+    #  get the average score
+    #    NMF
+
+    #  get the similarity score
+
     fsim = open("./cleanedseq.fa")
     simtx = simseq.simseq(virusindex, fsim)
     model = RSVD.train(LATENTDIM, train, dims, simtx,
@@ -66,9 +64,9 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
     return reslist
 #    print np.array(reslist)
 #    np.save('bestparam-res.npy', np.array(reslist))
+"""
 
-
-def _himf(LATENTDIM, REG, EXPERIMENTNUM, nmflag=None, gamma=None):
+def _himf(LATENTDIM, REG, EXPERIMENTNUM, nmfflag=None, gamma=0.):
     """
     """
     print "himf"
@@ -111,7 +109,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, nmflag=None, gamma=None):
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val,
-                       learnRate=0.0005, regularization=REG, nmfflag=nmflag, gamma=gamma)
+                       learnRate=0.0005, regularization=REG, nmfflag=nmfflag, gamma=gamma)
 
     sqerr = 0.0
 
@@ -126,12 +124,24 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, nmflag=None, gamma=None):
 
     modelpath = "./experiment{0}/model-ldim-{1}-reg-{2}".format(
                 EXPERIMENTNUM, LATENTDIM, REG)
+    rmsepath = "./experiment{0}/rmse-ldim-{1}-reg-{2}".format(
+                EXPERIMENTNUM, LATENTDIM, REG)
     if nmfflag:
+        modelpath = modelpath + "-nmf"
+        rmsepath = rmsepath + "-nmf"
+    modelpath = modelpath + "-gamma-{0}".format(gamma)
+    rmsepath = rmsepath + "-gamma-{0}".format(gamma)
+    modelpath = modelpath + "/"
 
-
-    model.save("./experiment{0}/model-ldim-{1}-reg-{2}".format(
-        EXPERIMENTNUM, LATENTDIM, REG))
-    f = open('./experiment{0}/rmse-ldim-{1}-reg-{2}'.format(EXPERIMENTNUM, LATENTDIM, REG), 'a+')
+    print os.path.dirname(modelpath)
+    if not os.path.exists(os.path.dirname(modelpath)):
+        try:
+            os.makedirs(os.path.dirname(modelpath))
+        except OSError as exc:
+            if exc.errno != errno.EEXIST:
+                raise
+    model.save(modelpath)
+    f = open(rmsepath, 'a+')
     f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
     f.close()
 
