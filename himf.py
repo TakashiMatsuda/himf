@@ -68,7 +68,7 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
 #    np.save('bestparam-res.npy', np.array(reslist))
 
 
-def _himf(LATENTDIM, REG, EXPERIMENTNUM):
+def _himf(LATENTDIM, REG, EXPERIMENTNUM, nmflag=None, gamma=None):
     """
     """
     print "himf"
@@ -111,7 +111,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val,
-                       learnRate=0.0005, regularization=REG, nmfflag=True)
+                       learnRate=0.0005, regularization=REG, nmfflag=nmflag, gamma=gamma)
 
     sqerr = 0.0
 
@@ -124,6 +124,13 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM):
 #    print np.array(reslist)
 #    np.save('bestparam-res.npy', np.array(reslist))
 
+    modelpath = "./experiment{0}/model-ldim-{1}-reg-{2}".format(
+                EXPERIMENTNUM, LATENTDIM, REG)
+    if nmfflag:
+
+
+    model.save("./experiment{0}/model-ldim-{1}-reg-{2}".format(
+        EXPERIMENTNUM, LATENTDIM, REG))
     f = open('./experiment{0}/rmse-ldim-{1}-reg-{2}'.format(EXPERIMENTNUM, LATENTDIM, REG), 'a+')
     f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
     f.close()
