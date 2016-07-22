@@ -7,9 +7,9 @@ import functools
 import subprocess
 import sys
 
-exp_num = 27
+exp_num = 30
 """
-probearray = None
+probearray = val
 配列による正則化のはんか性能を確認するための実験
 """
 
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     """
     Record experiment by copy this file
     """
-    runname = "run_{0}.py".format(exp_num)
+    runname = "-----------------------------------run_{0}.py-----------------------------".format(exp_num)
     sc = subprocess.check_call(["cp",
                                 "run.py",
                                 runname])
@@ -25,16 +25,16 @@ if __name__ == '__main__':
         print "INITIALIZATION ERROR"
         sys.exit()
 
-    klist = [1, 10, 20, 30, 40, 50]
+    klist = [1, 10, 20, 30, 40]
 
     reglist = [0., 0.01, 0.1, 0.5, 1]
     nmflist = [False, True]
     gammalist = [0., 0.01, 0.1, 0.5, 1]
 
     count = 0
-    for count in xrange(100):
+    for count in xrange(50):
         himf.randomizedata()
-        print "\r {0} th test running..".format(count)
+        print "{0} th test running..".format(count)
         for latentdim in klist:
             for reg in reglist:
                 for nmfflag in nmflist:

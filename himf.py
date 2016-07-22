@@ -68,8 +68,6 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
 
 
 def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
-
-    print "himf"
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
     virusindex = readdata.readvirusindex(fn_hi)
     serumindex = readdata.readserumindex(fn_hi)
@@ -109,7 +107,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
 
 # CAUTION: probeArray is off temporarily
     model = RSVD.train(LATENTDIM, train, dims, simtx,
-                       probeArray=None,
+                       probeArray=val,
                        learnRate=0.0005,
                        regularization=REG,
                        nmfflag=nmfflag,

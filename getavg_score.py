@@ -17,11 +17,11 @@ reglist = [0., 0.01, 0.1, 0.5, 1]
 nmflist = [False, True]
 gammalist = [0., 0.01, 0.1, 0.5, 1]
 """
-exp_num = 26
+exp_num = 30
 klist = [1, 10, 20, 30, 40, 50]
 reglist = [0., 0.01, 0.1, 0.5, 1]
 nmflist = [False, True]
-gammalist = [0., 0.01, 0.1, 0.5, 1, 2]
+gammalist = [0., 0.01, 0.1, 0.5, 1]
 
 mn = 100.
 mnparam = [0 for x in xrange(4)]
