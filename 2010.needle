@@ -1,0 +1,79 @@
+########################################
+# Program: needle
+# Rundate: Wed 13 Jul 2016 17:19:45
+# Commandline: needle
+#    [-asequence] needletest.fa
+#    [-bsequence] needletest.fa
+# Align_format: srspair
+# Report_file: 2010.needle
+########################################
+
+#=======================================
+#
+# Aligned_sequences: 2
+# 1: A/Minnesota/17/2010
+# 2: A/Minnesota/17/2010
+# Matrix: EBLOSUM62
+# Gap_penalty: 10.0
+# Extend_penalty: 0.5
+#
+# Length: 566
+# Identity:     566/566 (100.0%)
+# Similarity:   566/566 (100.0%)
+# Gaps:           0/566 ( 0.0%)
+# Score: 3040.0
+# 
+#
+#=======================================
+
+A/Minnesota/1      1 MKTIIAFSCILCLIFAQKLPGSDNSMATLCLGHHAVPNGTLVKTITDDQI     50
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1      1 MKTIIAFSCILCLIFAQKLPGSDNSMATLCLGHHAVPNGTLVKTITDDQI     50
+
+A/Minnesota/1     51 EVTNATELVQSSSTGRICNSPHQILDGKNCTLIDALLGDPHCDDFQNKEW    100
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1     51 EVTNATELVQSSSTGRICNSPHQILDGKNCTLIDALLGDPHCDDFQNKEW    100
+
+A/Minnesota/1    101 DLFVERSTAYSNCYPYYVPDYATLRSLVASSGNLEFTQESFNWTGVAQDG    150
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1    101 DLFVERSTAYSNCYPYYVPDYATLRSLVASSGNLEFTQESFNWTGVAQDG    150
+
+A/Minnesota/1    151 SSYACRRGSVNSFFSRLNWLYNLNYKYPEQNVTMPNNDKFDKLYIWGVHH    200
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1    151 SSYACRRGSVNSFFSRLNWLYNLNYKYPEQNVTMPNNDKFDKLYIWGVHH    200
+
+A/Minnesota/1    201 PGTDKDQTKLYVQASGRVIVSTKRSQQTVIPNIGSRPWVRGVSSIISIYW    250
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1    201 PGTDKDQTKLYVQASGRVIVSTKRSQQTVIPNIGSRPWVRGVSSIISIYW    250
+
+A/Minnesota/1    251 TIVKPGDILLINSTGNLIAPRGYFKIQSGKSSIMRSDAHIDECNSECITP    300
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1    251 TIVKPGDILLINSTGNLIAPRGYFKIQSGKSSIMRSDAHIDECNSECITP    300
+
+A/Minnesota/1    301 NGSIPNDKPFQNVNKITYGACPRYVKQNTLKLATGMRNVPEKQTRGIFGA    350
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1    301 NGSIPNDKPFQNVNKITYGACPRYVKQNTLKLATGMRNVPEKQTRGIFGA    350
+
+A/Minnesota/1    351 IAGFIENGWEGMVDGWYGFRHQNSEGTGQAADLKSTQAAINQITGKLNRV    400
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1    351 IAGFIENGWEGMVDGWYGFRHQNSEGTGQAADLKSTQAAINQITGKLNRV    400
+
+A/Minnesota/1    401 IKKTNEKFHQIEKEFSEVEGRIQDLEKYVEDTKIDLWSYNAELLVALENQ    450
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1    401 IKKTNEKFHQIEKEFSEVEGRIQDLEKYVEDTKIDLWSYNAELLVALENQ    450
+
+A/Minnesota/1    451 HTIDLTDSEMSKLFERTRRQLRENAEDMGNGCFKIYHKCDNACIGSIRNG    500
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1    451 HTIDLTDSEMSKLFERTRRQLRENAEDMGNGCFKIYHKCDNACIGSIRNG    500
+
+A/Minnesota/1    501 TYDHDIYRNEALNNRFQIKGVQLKSGYKDWILWISFAISCFLLCVVLLGF    550
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+A/Minnesota/1    501 TYDHDIYRNEALNNRFQIKGVQLKSGYKDWILWISFAISCFLLCVVLLGF    550
+
+A/Minnesota/1    551 IMWACQKGNIRCNICI    566
+                     ||||||||||||||||
+A/Minnesota/1    551 IMWACQKGNIRCNICI    566
+
+
+#---------------------------------------
+#---------------------------------------

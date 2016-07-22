@@ -1,0 +1,63 @@
+########################################
+# Program: needle
+# Rundate: Wed 20 Jul 2016 02:00:47
+# Commandline: needle
+#    -auto
+#    -outfile .simseq_needle.txt
+#    -asequence .simseq_x.fa
+#    -bsequence .simseq_y.fa
+#    -gapopen 10
+#    -gapextend 0.5
+# Align_format: srspair
+# Report_file: .simseq_needle.txt
+########################################
+
+#=======================================
+#
+# Aligned_sequences: 2
+# 1: x
+# 2: y
+# Matrix: EBLOSUM62
+# Gap_penalty: 10.0
+# Extend_penalty: 0.5
+#
+# Length: 346
+# Identity:     346/346 (100.0%)
+# Similarity:   346/346 (100.0%)
+# Gaps:           0/346 ( 0.0%)
+# Score: 1858.0
+# 
+#
+#=======================================
+
+x                  1 QKLPGNDNSTATLCLGHHAVPNGTLVKTITNDQIEVTNATELVQSSSTGG     50
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+y                  1 QKLPGNDNSTATLCLGHHAVPNGTLVKTITNDQIEVTNATELVQSSSTGG     50
+
+x                 51 ICDSPHQILDAENCTLIDALLGDPHCDGFQNKEWDLFVERSKAYSNCYPY    100
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+y                 51 ICDSPHQILDAENCTLIDALLGDPHCDGFQNKEWDLFVERSKAYSNCYPY    100
+
+x                101 DVPDYASLRSLVASSGTLEFNNESFNWTGVAQNGTSSACKRRSNKSFFSR    150
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+y                101 DVPDYASLRSLVASSGTLEFNNESFNWTGVAQNGTSSACKRRSNKSFFSR    150
+
+x                151 LNWLHQLKYKYPALNVTMPNNEKFDKLYIWGVHHPSTDSDQISLYAQAPG    200
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+y                151 LNWLHQLKYKYPALNVTMPNNEKFDKLYIWGVHHPSTDSDQISLYAQAPG    200
+
+x                201 RVTVSTKRSQQTVIPNIGSRPWVRGVSSRISIYWTIVKPGDILLINCTGN    250
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+y                201 RVTVSTKRSQQTVIPNIGSRPWVRGVSSRISIYWTIVKPGDILLINCTGN    250
+
+x                251 LIAPRGYFKIRSGKSSIMRSDASIGKCNSECITPNGSIPNDKPFQNVNRI    300
+                     ||||||||||||||||||||||||||||||||||||||||||||||||||
+y                251 LIAPRGYFKIRSGKSSIMRSDASIGKCNSECITPNGSIPNDKPFQNVNRI    300
+
+x                301 TYGACPRYVKQNTLKLATGMRNVPEKQTRGIFGAIAGFIENGWEGM    346
+                     ||||||||||||||||||||||||||||||||||||||||||||||
+y                301 TYGACPRYVKQNTLKLATGMRNVPEKQTRGIFGAIAGFIENGWEGM    346
+
+
+#---------------------------------------
+#---------------------------------------
