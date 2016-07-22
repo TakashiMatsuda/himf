@@ -21,8 +21,8 @@ def randomizedata():
     np.random.shuffle(ratings)
     np.save('ratings.npy', ratings)
 
-"""
-def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
+
+def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
     virusindex = readdata.readvirusindex(fn_hi)
     serumindex = readdata.readserumindex(fn_hi)
@@ -36,35 +36,30 @@ def _himf_rt(LATENTDIM, REG, EXPERIMENTNUM, gamma=0.2):
     # split train to 1(validate) : 9(training)
     val = train[v:]
     train = train[:v]
-    print "pre read"
     from rsvd import RSVD
-    print "after read"
     dims = (len(virusindex), len(serumindex))
 
-    #  get the average score
-    #    NMF
-
     #  get the similarity score
+    seq_date = os.stat("./realdata.fa").st_mtime
+    simtx_date = os.stat("./simtx.npy").st_mtime
+    if simtx_date <= seq_date:
+        fsim = open("../realdata.fa")
+        print("realdata.fa is renewed. updating simtx.npy..")
+        simtx = simseq.simseq(virusindex, fsim)
+        np.save("simtx.npy", simtx)
+    else:
+        simtx = np.load("simtx.npy")
 
-    fsim = open("./cleanedseq.fa")
-    simtx = simseq.simseq(virusindex, fsim)
     model = RSVD.train(LATENTDIM, train, dims, simtx,
-                       probeArray=val,
-                       learnRate=0.0005, regularization=REG, nmfflag=True,
+                       probeArray=None,
+                       learnRate=0.0005, regularization=REG, nmfflag=nmfflag,
                        gamma=gamma)
-
-    sqerr = 0.0
 
     reslist = []
     for strainID, serumID, rating in test:
-        err = rating - model(strainID, serumID)
         reslist.append([rating, model(strainID, serumID)])
-        sqerr += err * err
-    sqerr /= test.shape[0]
     return reslist
-#    print np.array(reslist)
-#    np.save('bestparam-res.npy', np.array(reslist))
-"""
+    np.save('bestparam-res.npy', np.array(reslist))
 
 
 def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
@@ -105,7 +100,6 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
     else:
         simtx = np.load("simtx.npy")
 
-# CAUTION: probeArray is off temporarily
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val,
                        learnRate=0.0005,

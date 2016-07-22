@@ -28,7 +28,7 @@ mnparam = [0 for x in xrange(4)]
 avgarray = np.zeros((len(klist), len(nmflist), len(reglist), len(gammalist)))
 
 for ldim_cnt, ldim in enumerate(klist):
-   for nmf_cnt, nmf in enumerate(["-nmf", ""]):
+    for nmf_cnt, nmf in enumerate(["-nmf", ""]):
         for reg_cnt, reg in enumerate(reglist):
             for gamma_cnt, gamma in enumerate(gammalist):
                 cnt = 0
