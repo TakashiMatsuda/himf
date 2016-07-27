@@ -6,9 +6,7 @@ saveした、あるパラメータ設定のrsvdmodelを、
 キャッシュから呼び出して使うためのスクリプト
 """
 
-
 import numpy as np
-import statsmodels.api as sm
 import matplotlib.pyplot as plt
 
 exp_num = 29
