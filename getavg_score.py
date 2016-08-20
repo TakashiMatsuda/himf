@@ -2,27 +2,8 @@
 # -*- coding:utf-8 -*-
 
 import numpy as np
+from runconfig import *
 
-"""
-exp_num = 23
-klist = [10]
-reglist = [0.01]
-nmflist = [False, True]
-gammalist = [0, 0.01, 0.1]
-"""
-"""
-exp_num = 22
-klist = [1, 10, 20, 30, 40, 50]
-reglist = [0., 0.01, 0.1, 0.5, 1]
-nmflist = [False, True]
-gammalist = [0., 0.01, 0.1, 0.5, 1]
-"""
-exp_num = 49
-
-klist = [50]
-reglist = [0.01]
-nmflist = [False]
-gammalist = [0., 0.00001, 0.0001, 0.001, 0.01]
 nmf_loop_list = ["-nmf" if x else "" for x in nmflist]
 
 mn = 100.

@@ -4,6 +4,8 @@
 import himf
 from multiprocessing import Pool
 import functools
+import subprocess
+import sys
 from runconfig import *
 
 """
@@ -19,7 +21,13 @@ if __name__ == '__main__':
     """
     Record experiment by copy this file
     """
-    saverunconfig()
+    runname = "run_{0}.py".format(exp_num)
+    sc = subprocess.check_call(["cp",
+                                "run.py",
+                                runname])
+    if sc != 0:
+        print "INITIALIZATION ERROR"
+        sys.exit()
 
     count = 0
     for count in xrange(3):
@@ -28,7 +36,7 @@ if __name__ == '__main__':
         for latentdim in klist:
             for reg in reglist:
                 for nmfflag in nmflist:
-                    p = Pool(7)
+                    p = Pool(6)
                     maphimf = functools.partial(himf._himf,
                                                 latentdim,
                                                 reg,

@@ -4,18 +4,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from runconfig import *
 
 """
 以下のパラメータ群は、今後直打を避け、キャッシュファイルへと移行されるべき物
 """
-
-exp_num = 150
-
-klist = range(100)
-reglist = range(0, stop=0.2, step=0.001)
-nmflist = [False, True]
-gammalist = [0., 0.00001, 0.0001, 0.001, 0.01]
-
 
 for k_cnt, k in enumerate(klist):
     for nmf_cnt, nmf in enumerate(nmflist):
