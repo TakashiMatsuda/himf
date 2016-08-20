@@ -51,8 +51,9 @@ def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
         simtx = np.load("simtx.npy")
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
-                       probeArray=None,
+                       probeArray=None, maxEpochs=500,
                        learnRate=0.0005, regularization=REG, nmfflag=nmfflag,
+                       randomNoise=5.,
                        gamma=gamma)
 
     reslist = []
@@ -101,10 +102,11 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
         simtx = np.load("simtx.npy")
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
-                       probeArray=val,
-                       learnRate=0.0005,
+                       probeArray=val, maxEpochs=1000,
+                       learnRate=0.001,
                        regularization=REG,
                        nmfflag=nmfflag,
+                       randomNoise=0.1,
                        gamma=gamma)
 
     sqerr = 0.0

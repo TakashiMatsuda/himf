@@ -35,7 +35,7 @@ if __name__ == '__main__':
     gammalist = [0., 0.00001, 0.0001, 0.001, 0.01]
 
     count = 0
-    for count in xrange(3):
+    for count in xrange(5):
         himf.randomizedata()
         print "{0} th test running..".format(count)
         for latentdim in klist:

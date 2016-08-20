@@ -8,19 +8,13 @@ import seaborn as sns
 """
 以下のパラメータ群は、今後直打を避け、キャッシュファイルへと移行されるべき物
 """
-"""
-exp_num = 23
-klist = [10]
-reglist = [0.01]
-nmflist = [False, True]
-gammalist = [0, 0.01, 0.1]
-"""
 
-exp_num = 29
-klist = [1, 10, 20, 30, 40, 50]
-reglist = [0., 0.01, 0.1, 0.5, 1]
+exp_num = 150
+
+klist = range(100)
+reglist = range(0, stop=0.2, step=0.001)
 nmflist = [False, True]
-gammalist = [0., 0.01, 0.1, 0.5, 1]
+gammalist = [0., 0.00001, 0.0001, 0.001, 0.01]
 
 
 for k_cnt, k in enumerate(klist):
@@ -31,7 +25,7 @@ for k_cnt, k in enumerate(klist):
         fig, ax = plt.subplots()
         print "k", k, "nmf", nmf
         print mfdata[k_cnt][nmf_cnt]
-        ax = sns.heatmap(mfdata[k_cnt][nmf_cnt], cmap='bwr', vmin=1.4, vmax=2.0,
+        ax = sns.heatmap(mfdata[k_cnt][nmf_cnt], cmap='bwr',
                          yticklabels=reglist,
                          xticklabels=gammalist)
         plt.title('RMSE By Regularization Parameter on K={0}, NMF={1}'.format(k, nmf))

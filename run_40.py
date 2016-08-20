@@ -7,14 +7,10 @@ import functools
 import subprocess
 import sys
 
-exp_num = 49
+exp_num = 40
 """
 probearray = val
 より小さな正則化係数での実験
-初期値を[-0.005, 0.005]から[-0.1, 0.1]に変更<- 難しい
-maxepochsを100から1000に変更
-learnrate 0.0005 -> 0.001 (x2)
-earlystoppingはオン
 """
 
 if __name__ == '__main__':
@@ -30,12 +26,13 @@ if __name__ == '__main__':
         sys.exit()
 
     klist = [50]
+
     reglist = [0.01]
-    nmflist = [False]
-    gammalist = [0., 0.00001, 0.0001, 0.001, 0.01]
+    nmflist = [True]
+    gammalist = [0.00001, 0.0001, 0.001, 0.01]
 
     count = 0
-    for count in xrange(3):
+    for count in xrange(100):
         himf.randomizedata()
         print "{0} th test running..".format(count)
         for latentdim in klist:

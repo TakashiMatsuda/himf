@@ -3,4 +3,4 @@
 cd pyrsvd;
 make;
 cd ../;
-python himf.py 10 0.01 10;
+python run.py

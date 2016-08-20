@@ -17,18 +17,20 @@ reglist = [0., 0.01, 0.1, 0.5, 1]
 nmflist = [False, True]
 gammalist = [0., 0.01, 0.1, 0.5, 1]
 """
-exp_num = 30
-klist = [1, 10, 20, 30, 40, 50]
-reglist = [0., 0.01, 0.1, 0.5, 1]
-nmflist = [False, True]
-gammalist = [0., 0.01, 0.1, 0.5, 1]
+exp_num = 49
+
+klist = [50]
+reglist = [0.01]
+nmflist = [False]
+gammalist = [0., 0.00001, 0.0001, 0.001, 0.01]
+nmf_loop_list = ["-nmf" if x else "" for x in nmflist]
 
 mn = 100.
 mnparam = [0 for x in xrange(4)]
 avgarray = np.zeros((len(klist), len(nmflist), len(reglist), len(gammalist)))
 
 for ldim_cnt, ldim in enumerate(klist):
-    for nmf_cnt, nmf in enumerate(["-nmf", ""]):
+    for nmf_cnt, nmf in enumerate(nmf_loop_list):
         for reg_cnt, reg in enumerate(reglist):
             for gamma_cnt, gamma in enumerate(gammalist):
                 cnt = 0
