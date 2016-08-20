@@ -52,7 +52,7 @@ def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=None, maxEpochs=500,
-                       learnRate=0.0005, regularization=REG, nmfflag=nmfflag,
+                       learnRate=0.001, regularization=REG, nmfflag=nmfflag,
                        randomNoise=5.,
                        gamma=gamma)
 
@@ -63,7 +63,7 @@ def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
     np.save('bestparam-res.npy', np.array(reslist))
 
 
-def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
+def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None, lr=0.001):
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
     virusindex = readdata.readvirusindex(fn_hi)
     serumindex = readdata.readserumindex(fn_hi)
@@ -103,7 +103,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None):
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val, maxEpochs=1000,
-                       learnRate=0.001,
+                       learnRate=0.005,
                        regularization=REG,
                        nmfflag=nmfflag,
                        randomNoise=0.1,

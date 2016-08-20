@@ -2,12 +2,14 @@
 # -*- coding:utf-8 -*-
 import subprocess
 
-exp_num = 53
+exp_num = 52
 
-klist = ([100, 120, 150, 200])
+klist = range(1,30)
+klist.extend([40, 45, 50, 60, 70, 80, 100])
 reglist = [0.005]
 nmflist = [False]
-gammalist = [0., 0.00001, 0.0005, 0.001, 0.003, 0.005]
+gammalist = [0., 0.00001, 0.0001, 0.0005, 0.001, 0.005, 0.01]
+#gammalist = [0.0005]
 
 
 def saverunconfig():

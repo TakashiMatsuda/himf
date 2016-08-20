@@ -22,7 +22,7 @@ if __name__ == '__main__':
     saverunconfig()
 
     count = 0
-    for count in xrange(3):
+    for count in xrange(4):
         himf.randomizedata()
         print "{0} th test running..".format(count)
         for latentdim in klist:
