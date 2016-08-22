@@ -3,11 +3,7 @@
 
 import numpy as np
 
-exp_num = 29
-klist = [1, 10, 20, 30, 40, 50]
-reglist = [0., 0.01, 0.1, 0.5, 1]
-nmflist = [False, True]
-gammalist = [0., 0.01, 0.1, 0.5, 1]
+from runconfig import *
 
 mn_mf = 100.
 mn_nmf = 100.
@@ -20,10 +16,3 @@ mnparam_mf_align = [0. for x in xrange(3)]
 
 
 avgarray = np.load("avgary-{0}.npy".format(exp_num))
-
-
-# mf
-
-        # nmf
-        # mf_align
-        # nmf_align
