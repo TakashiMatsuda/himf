@@ -63,7 +63,8 @@ def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
     np.save('bestparam-res.npy', np.array(reslist))
 
 
-def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None, lr=0.001):
+def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
+          nmfflag=None, lr=0.001, esflag=True):
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
     virusindex = readdata.readvirusindex(fn_hi)
     serumindex = readdata.readserumindex(fn_hi)
@@ -102,8 +103,8 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None, lr=0.001):
         simtx = np.load("simtx.npy")
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
-                       probeArray=val, esflag=False, maxEpochs=1000,
-                       learnRate=0.005,
+                       probeArray=val, esflag=esflag, maxEpochs=100,
+                       learnRate=lr,
                        regularization=REG,
                        nmfflag=nmfflag,
                        randomNoise=0.1,
@@ -130,7 +131,6 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma, nmfflag=None, lr=0.001):
     modelpath = modelpath + "-gamma-{0}".format(gamma)
     rmsepath = rmsepath + "-gamma-{0}".format(gamma)
     modelpath = modelpath + "/"
-
 
     if not os.path.exists(os.path.dirname(modelpath)):
         try:
