@@ -2,13 +2,13 @@
 # -*- coding:utf-8 -*-
 import subprocess
 
-exp_num = 74
+exp_num = 161
 
-klist = ([20])
+klist = ([100])
 reglist = [0.005]
 nmflist = [False]
 gammalist = [0.001]
-lr = 0.005
+lr = 0.003
 
 
 def saverunconfig():

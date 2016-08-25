@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 import subprocess
 
-exp_num = 74
+exp_num = 171
 
 klist = ([20])
 reglist = [0.005]

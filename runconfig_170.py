@@ -2,9 +2,9 @@
 # -*- coding:utf-8 -*-
 import subprocess
 
-exp_num = 74
+exp_num = 170
 
-klist = ([20])
+klist = ([10])
 reglist = [0.005]
 nmflist = [False]
 gammalist = [0.001]
