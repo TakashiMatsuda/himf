@@ -2,6 +2,6 @@
 
 cd pyrsvd;
 make;
-python setup install;
+python setup.py install;
 cd ../;
 python run.py

@@ -102,6 +102,9 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     else:
         simtx = np.load("simtx.npy")
 
+    print "simtx"
+    print(simtx)
+
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val, esflag=esflag, maxEpochs=100,
                        learnRate=lr,
