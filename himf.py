@@ -60,7 +60,6 @@ def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
     for strainID, serumID, rating in test:
         reslist.append([rating, model(strainID, serumID)])
     return reslist
-    np.save('bestparam-res.npy', np.array(reslist))
 
 
 def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
@@ -106,7 +105,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     print(simtx)
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
-                       probeArray=val, esflag=esflag, maxEpochs=100,
+                       probeArray=val, esflag=esflag, maxEpochs=1000,
                        learnRate=lr,
                        regularization=REG,
                        nmfflag=nmfflag,
@@ -115,14 +114,12 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
 
     sqerr = 0.0
 
-#    reslist = []
+    reslist = []
     for strainID, serumID, rating in test:
         err = rating - model(strainID, serumID)
-#        reslist.append([rating, model(strainID, serumID)])
+        reslist.append([rating, model(strainID, serumID)])
         sqerr += err * err
     sqerr /= test.shape[0]
-#    print np.array(reslist)
-#    np.save('bestparam-res.npy', np.array(reslist))
 
     modelpath = "./experiment{0}/model-ldim-{1}-reg-{2}".format(
                 EXPERIMENTNUM, LATENTDIM, REG)
@@ -134,6 +131,9 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     modelpath = modelpath + "-gamma-{0}".format(gamma)
     rmsepath = rmsepath + "-gamma-{0}".format(gamma)
     modelpath = modelpath + "/"
+
+    np.save(modelpath+'true_vs_prediction.npy',
+            np.array(reslist))
 
     if not os.path.exists(os.path.dirname(modelpath)):
         try:
@@ -148,7 +148,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
     f.close()
 
-    return 0
+    return reslist
 
 
 if __name__ == '__main__':

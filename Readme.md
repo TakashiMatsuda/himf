@@ -20,6 +20,8 @@ executeexperiment.sh : 網羅的な実験の為の範囲決め, 実験番号を�
 run.py : 実際に各パラメータについてプロセスを立ててhimf.pyを実行する
 
 ##プロット
+予測結果を正解値と比較する：
+python show-predict-true.py $EXPERIMENTNUM
 
 ## New flow to work
 一連の流れはexp_numで管理される。
