@@ -22,6 +22,10 @@ run.py : 実際に各パラメータについてプロセスを立ててhimf.py�
 ##プロット
 予測結果を正解値と比較する：
 python show-predict-true.py $EXPERIMENTNUM
+$EXPERIMENTNUMはshow-predict-true.pyの中にも
+書き込まないと駄目（くそこーど）
+import 文の引数を可変にする仕組みを作っていないので
+そこから脱却できていない
 
 ## New flow to work
 一連の流れはexp_numで管理される。
