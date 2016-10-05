@@ -23,6 +23,9 @@ def randomizedata():
 
 
 def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
+    """
+    deprecated function
+    """
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
     virusindex = readdata.readvirusindex(fn_hi)
     serumindex = readdata.readserumindex(fn_hi)
