@@ -2,12 +2,12 @@
 # -*- coding:utf-8 -*-
 import subprocess
 
-exp_num = 76
+exp_num = 80
 
-klist = ([20])
+klist = [10, 20, 25, 30, 40, 50]
 reglist = [0.005]
 nmflist = [False]
-gammalist = [0.0001]
+gammalist = [0, 0.0001, 0.001]
 lr = 0.005
 
 

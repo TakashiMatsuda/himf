@@ -15,7 +15,7 @@ import os
 
 
 def randomizedata():
-    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
+    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data_minority.csv'
     ratings = readdata.readHIdata(fn_hi)
     # make sure that the ratings a properly shuffled
     np.random.shuffle(ratings)
@@ -67,7 +67,7 @@ def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
 
 def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
           nmfflag=None, lr=0.001, esflag=True):
-    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
+    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data_minority.csv'
     virusindex = readdata.readvirusindex(fn_hi)
     serumindex = readdata.readserumindex(fn_hi)
     ratings = np.load('ratings.npy')
@@ -135,9 +135,6 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     rmsepath = rmsepath + "-gamma-{0}".format(gamma)
     modelpath = modelpath + "/"
 
-    np.save(modelpath+'true_vs_prediction.npy',
-            np.array(reslist))
-
     if not os.path.exists(os.path.dirname(modelpath)):
         try:
             os.makedirs(os.path.dirname(modelpath))
@@ -150,6 +147,9 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     print "Test RMSE: {0}\n".format(np.sqrt(sqerr))
     f.write("Test RMSE: {0}\n".format(np.sqrt(sqerr)))
     f.close()
+
+    np.save(modelpath + 'true_vs_prediction.npy',
+            np.array(reslist))
 
     return reslist
 

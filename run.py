@@ -22,13 +22,13 @@ if __name__ == '__main__':
     saverunconfig()
 
     count = 0
-    for count in xrange(1):
+    for count in xrange(5):
         himf.randomizedata()
         print "{0} th test running..".format(count)
         for latentdim in klist:
             for reg in reglist:
                 for nmfflag in nmflist:
-                    p = Pool(4)
+                    p = Pool(6)
                     maphimf = functools.partial(himf._himf,
                                                 latentdim,
                                                 reg,
