@@ -67,6 +67,11 @@ def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
 
 def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
           nmfflag=None, lr=0.001, esflag=True):
+    """
+    Main part of himf
+    She prepares the dataset from H3N2_HI_data.csv.
+    She needs ratings.npy got ready.
+    """
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data_minority.csv'
     virusindex = readdata.readvirusindex(fn_hi)
     serumindex = readdata.readserumindex(fn_hi)
@@ -87,10 +92,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
         get the average score
         NMF
     """
-    """
-    fsim = open("../cleanedseq.fa")
-    simtx = simseq.simseq(virusindex, fsim)
-    """
+
     """
     Cache date check and get simtx from cache
     """
@@ -103,9 +105,6 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
         np.save("simtx.npy", simtx)
     else:
         simtx = np.load("simtx.npy")
-
-    print "simtx"
-    print(simtx)
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val, esflag=esflag, maxEpochs=1000,

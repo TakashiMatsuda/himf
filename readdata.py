@@ -68,13 +68,11 @@ def readHIdata(filename):
     the type is
     (uint4, uint4, f4)
     """
-    # lenfhi: the number of entries
-#    lenfhi = sum(1 for line in open(filename))
-    # h_hi: datafile
+    # f_hi: datafile
     serumindex = readserumindex(filename)
     virusindex = readvirusindex(filename)
     f_hi = open(filename)
-    # mold_hiarray: each element is
+    # mold_hiarray: each element is ...
     mold_hiarray = []
     for cnt, line in enumerate(f_hi):
         if cnt == 0:
@@ -82,11 +80,10 @@ def readHIdata(filename):
 
         parse = line.split(',')
         # TODO: the entry that its value is out of range also should be
-        # into calculation
+        # entered into calculation
         if parse[6][0] == '<':
             continue
 #        elif parse[1] not in strainindex or parse[4] not in strainindex:
-#            continue
         else:
             # movie is 1 origin!
             mold_hiarray.append((virusindex[parse[1]]+1,
