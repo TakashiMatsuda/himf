@@ -108,7 +108,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
 #    seq_date = os.stat("./realdata_minority.fa").st_mtime
 #    simtx_date = os.stat("./simtx_minority.npy").st_mtime
 #    if simtx_date <= seq_date:
-    fsim = open("../realdata_minority.fa")
+    fsim = open("./realdata_minority.fa")
     print("making simtx_minority.npy..")
     simtx = simseq.simseq(virusindex, fsim)
     np.save("simtx_minority.npy", simtx)
