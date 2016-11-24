@@ -71,6 +71,14 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     Main part of himf
     She prepares the dataset from H3N2_HI_data.csv.
     She needs ratings.npy got ready.
+    LATENTDIM: the number of the rank of the matrix calculated
+    REG: alpha variable
+    EXPERIMENTNUM: the number of the experiment for keep it in order
+    gamma: the parametric variable
+    that control the strength of the normalization by sequences
+    nmfflag: search only Non-negative Matrix if it is True
+    lr: learning step size of SGD
+    esflag : Early stopping applied if it is True
     """
     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data_minority.csv'
     virusindex = readdata.readvirusindex(fn_hi)
@@ -96,15 +104,15 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     """
     Cache date check and get simtx from cache
     """
-    seq_date = os.stat("./realdata.fa").st_mtime
-    simtx_date = os.stat("./simtx.npy").st_mtime
+    seq_date = os.stat("./realdata_minority.fa").st_mtime
+    simtx_date = os.stat("./simtx_minority.npy").st_mtime
     if simtx_date <= seq_date:
-        fsim = open("../realdata.fa")
-        print("realdata.fa is renewed. updating simtx.npy..")
+        fsim = open("../realdata_minority.fa")
+        print("realdata.fa is renewed. updating simtx_minority.npy..")
         simtx = simseq.simseq(virusindex, fsim)
-        np.save("simtx.npy", simtx)
+        np.save("simtx_minority.npy", simtx)
     else:
-        simtx = np.load("simtx.npy")
+        simtx = np.load("simtx_minority.npy")
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val, esflag=esflag, maxEpochs=1000,
