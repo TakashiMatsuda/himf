@@ -86,10 +86,10 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     ratings = np.load('ratings.npy')
 
     # create train, validation and test sets.
-    n = int(ratings.shape[0]*0.8)
+    n = int(ratings.shape[0] * 0.8)
     train = ratings[:n]
     test = ratings[n:]
-    v = int(train.shape[0]*0.9)
+    v = int(train.shape[0] * 0.9)
     # split train to 1(validate) : 9(training)
     val = train[v:]
     train = train[:v]
@@ -103,16 +103,17 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
 
     """
     Cache date check and get simtx from cache
+    -> Off for first experiment of minority
     """
-    seq_date = os.stat("./realdata_minority.fa").st_mtime
-    simtx_date = os.stat("./simtx_minority.npy").st_mtime
-    if simtx_date <= seq_date:
-        fsim = open("../realdata_minority.fa")
-        print("realdata.fa is renewed. updating simtx_minority.npy..")
-        simtx = simseq.simseq(virusindex, fsim)
-        np.save("simtx_minority.npy", simtx)
-    else:
-        simtx = np.load("simtx_minority.npy")
+#    seq_date = os.stat("./realdata_minority.fa").st_mtime
+#    simtx_date = os.stat("./simtx_minority.npy").st_mtime
+#    if simtx_date <= seq_date:
+    fsim = open("../realdata_minority.fa")
+    print("making simtx_minority.npy..")
+    simtx = simseq.simseq(virusindex, fsim)
+    np.save("simtx_minority.npy", simtx)
+#    else:
+#        simtx = np.load("simtx_minority.npy")
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val, esflag=esflag, maxEpochs=1000,
