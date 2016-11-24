@@ -1,6 +1,6 @@
 ########################################
 # Program: needle
-# Rundate: Wed 20 Jul 2016 02:00:47
+# Rundate: Thu 24 Nov 2016 16:49:13
 # Commandline: needle
 #    -auto
 #    -outfile .simseq_needle.txt
@@ -21,42 +21,42 @@
 # Gap_penalty: 10.0
 # Extend_penalty: 0.5
 #
-# Length: 346
-# Identity:     346/346 (100.0%)
-# Similarity:   346/346 (100.0%)
-# Gaps:           0/346 ( 0.0%)
-# Score: 1858.0
+# Length: 329
+# Identity:     303/329 (92.1%)
+# Similarity:   313/329 (95.1%)
+# Gaps:           0/329 ( 0.0%)
+# Score: 1631.0
 # 
 #
 #=======================================
 
-x                  1 QKLPGNDNSTATLCLGHHAVPNGTLVKTITNDQIEVTNATELVQSSSTGG     50
-                     ||||||||||||||||||||||||||||||||||||||||||||||||||
-y                  1 QKLPGNDNSTATLCLGHHAVPNGTLVKTITNDQIEVTNATELVQSSSTGG     50
+x                  1 QKLPGNDNSTATLCLGHHAVPNGTIVKTITNDQIEVTNATELVQSSSTGG     50
+                     ||||||||||||||||||||||||:|||||||||||||||||||||||..
+y                  1 QKLPGNDNSTATLCLGHHAVPNGTLVKTITNDQIEVTNATELVQSSSTSR     50
 
-x                 51 ICDSPHQILDAENCTLIDALLGDPHCDGFQNKEWDLFVERSKAYSNCYPY    100
-                     ||||||||||||||||||||||||||||||||||||||||||||||||||
-y                 51 ICDSPHQILDAENCTLIDALLGDPHCDGFQNKEWDLFVERSKAYSNCYPY    100
+x                 51 ICDSPHQILDGENCTLIDALLGDPQCDGFQNKKWDLFVERSKAYSNCYPY    100
+                     ||||||||||||||||||||||||.|||||||:|||||||||.|||||||
+y                 51 ICDSPHQILDGENCTLIDALLGDPHCDGFQNKEWDLFVERSKTYSNCYPY    100
 
-x                101 DVPDYASLRSLVASSGTLEFNNESFNWTGVAQNGTSSACKRRSNKSFFSR    150
-                     ||||||||||||||||||||||||||||||||||||||||||||||||||
-y                101 DVPDYASLRSLVASSGTLEFNNESFNWTGVAQNGTSSACKRRSNKSFFSR    150
+x                101 DVPDYASLRSLVASSGTLEFNNESFNWTGVTQNGTSSACKRRSNNSFFSR    150
+                     |||||.||||||||||||||||||||||||.||||||||||||:.|||||
+y                101 DVPDYVSLRSLVASSGTLEFNNESFNWTGVAQNGTSSACKRRSDKSFFSR    150
 
-x                151 LNWLHQLKYKYPALNVTMPNNEKFDKLYIWGVHHPSTDSDQISLYAQAPG    200
-                     ||||||||||||||||||||||||||||||||||||||||||||||||||
-y                151 LNWLHQLKYKYPALNVTMPNNEKFDKLYIWGVHHPSTDSDQISLYAQAPG    200
+x                151 LNWLTHLKFKYPALNVTMPNNENFDKLYIWGVHHPGTDNDQISLYAQASG    200
+                     ||||..|::|||||||||||||.|||||||||||||||:|||.:||||||
+y                151 LNWLHQLRYKYPALNVTMPNNEKFDKLYIWGVHHPGTDSDQIRIYAQASG    200
 
-x                201 RVTVSTKRSQQTVIPNIGSRPWVRGVSSRISIYWTIVKPGDILLINCTGN    250
-                     ||||||||||||||||||||||||||||||||||||||||||||||||||
-y                201 RVTVSTKRSQQTVIPNIGSRPWVRGVSSRISIYWTIVKPGDILLINCTGN    250
+x                201 RITVSTKRSQQTVIPNIGSRPRVRDISSRISIYWTIVKPGDILLINCTGN    250
+                     |:|||||||||||||||||||.||.:||||||:|||||||||||||.|||
+y                201 RVTVSTKRSQQTVIPNIGSRPWVRGVSSRISIHWTIVKPGDILLINSTGN    250
 
-x                251 LIAPRGYFKIRSGKSSIMRSDASIGKCNSECITPNGSIPNDKPFQNVNRI    300
+x                251 LIAPRGYFKIRSGKSSIMRSDAPIGKCNSECITPNGSIPNDKPFQNVNRI    300
                      ||||||||||||||||||||||||||||||||||||||||||||||||||
-y                251 LIAPRGYFKIRSGKSSIMRSDASIGKCNSECITPNGSIPNDKPFQNVNRI    300
+y                251 LIAPRGYFKIRSGKSSIMRSDAPIGKCNSECITPNGSIPNDKPFQNVNRI    300
 
-x                301 TYGACPRYVKQNTLKLATGMRNVPEKQTRGIFGAIAGFIENGWEGM    346
-                     ||||||||||||||||||||||||||||||||||||||||||||||
-y                301 TYGACPRYVKQNTLKLATGMRNVPEKQTRGIFGAIAGFIENGWEGM    346
+x                301 TYGACPRYVKQNTLKLATGMRNVPETQTR    329
+                     |||||||||||.|||||||||||||.|||
+y                301 TYGACPRYVKQKTLKLATGMRNVPEKQTR    329
 
 
 #---------------------------------------

@@ -114,6 +114,7 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     np.save("simtx_minority.npy", simtx)
 #    else:
 #        simtx = np.load("simtx_minority.npy")
+    print("simtx_minority calculated!")
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val, esflag=esflag, maxEpochs=1000,
