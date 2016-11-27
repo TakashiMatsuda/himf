@@ -140,16 +140,15 @@ def simseq_parallel(idx, f):
     m = len(dicseq)
     alnmtx = np.zeros((m, m))
     for i in xrange(m):
-        print("calculating simtx.... "+str(i)+" in "+str(m))
+        print("calculating simtx.... " + str(i) + " in "+ str(m))
 
-        ds_first = [dicseq[i]] * m
-        loopnum_list = [x + i * m for x in range(m)]
-
-        func_args = [(similarity, dicseq[i], dicseq[j], i * m + j) for j in range(m)]
-        p = Pool(4)        
+        func_args = [(similarity,
+                      dicseq[i],
+                      dicseq[j],
+                      i * m + j) for j in range(m)]
+        p = Pool(4)
         alnmtx[i] = p.map(argwrapper, func_args)
 
-        # alnmtx[i] = p.map(similarity, ds_first, dicseq.values(), loopnum_list)
         p.close()
         p.join()
 
