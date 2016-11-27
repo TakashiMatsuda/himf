@@ -2,7 +2,10 @@
 # -*- coding:utf-8 -*-
 import subprocess
 
-exp_num = 91
+exp_num = 93
+"""
+離散していない値を取っているデータ集合に対する性能評価の実験
+"""
 
 klist = [10, 20, 25, 30, 40, 50, 100]
 reglist = [0.005]

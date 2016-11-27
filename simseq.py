@@ -7,6 +7,7 @@ from Bio.Emboss.Applications import NeedleCommandline
 import scipy as sp
 from multiprocessing import Pool
 from scipy import stats
+import os
 
 
 def _dicseq(f, idx):
@@ -86,7 +87,11 @@ def similarity(x, y, loopnum):
                                      outfile=".simseq_needle_{0}.txt".format(loopnum),
                                      auto=True)
     needle_cline()
-    return parse_getscore(".simseq_needle_{0}.txt".format(loopnum))
+    os.remove(".simseq_x_{0}.fa".format(loopnum))
+    os.remove(".simseq_y_{0}.fa".format(loopnum))
+    res = parse_getscore(".simseq_needle_{0}.txt".format(loopnum))
+    os.remove(".simseq_needle_{0}.txt".format(loopnum))
+    return res
 
 
 def regularizesim(alnmtx, normalflag, expflag):

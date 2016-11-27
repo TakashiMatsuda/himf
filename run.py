@@ -12,7 +12,6 @@ probearray = val
 初期値を[-0.005, 0.005]から[-0.1, 0.1]に変更<- 難しい
 maxepochsを100から1000に変更
 learnrate 0.0005 -> 0.001 (x2)
-earlystoppingはオフ
 """
 
 if __name__ == '__main__':
@@ -34,7 +33,7 @@ if __name__ == '__main__':
                                                 reg,
                                                 exp_num,
                                                 nmfflag=nmfflag,
-                                                esflag=False,
+                                                esflag=True,
                                                 lr=lr,)
                     result = p.map(maphimf, gammalist)
                     print "result: ", result
