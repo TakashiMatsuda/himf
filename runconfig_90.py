@@ -4,7 +4,7 @@ import subprocess
 
 exp_num = 90
 
-klist = [10, 20, 25, 30, 40, 50]
+klist = [10, 20, 25, 30, 40, 50, 100]
 reglist = [0.005]
 nmflist = [False]
 gammalist = [0, 0.0001, 0.001]

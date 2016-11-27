@@ -136,6 +136,7 @@ def simseq_parallel(idx, f):
     idx : dict, (NCBI strain name : ID)
     f : File Object pointing the fasta file
     """
+    print("Parallel calculating simtx!")
     dicseq = _dicseq(f, idx)
     m = len(dicseq)
     alnmtx = np.zeros((m, m))

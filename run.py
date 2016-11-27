@@ -28,16 +28,15 @@ if __name__ == '__main__':
         for latentdim in klist:
             for reg in reglist:
                 for nmfflag in nmflist:
-#                    p = Pool(1)
-                    # maphimf = functools.partial(himf._himf,
-                    #                             latentdim,
-                    #                             reg,
-                    #                             exp_num,
-                    #                             nmfflag=nmfflag,
-                    #                             esflag=False,
-                    #                             lr=lr,)
-                    # result = map(maphimf, gammalist)
-                    himf._himf(latentdim, reg, exp_num, 0.0001, nmfflag=nmfflag, esflag=True, lr=lr)
+                    p = Pool(4)
+                    maphimf = functools.partial(himf._himf,
+                                                latentdim,
+                                                reg,
+                                                exp_num,
+                                                nmfflag=nmfflag,
+                                                esflag=False,
+                                                lr=lr,)
+                    result = p.map(maphimf, gammalist)
                     print "result: ", result
-                    # p.close()
-                    # p.join()
+                    p.close()
+                    p.join()
