@@ -115,9 +115,10 @@ def simseq(idx, f):
     m = len(dicseq)
     alnmtx = np.zeros((m, m))
     for i in xrange(m):
+        print("calculating simtx.... "+str(i)+" in "+str(m))
         for j in xrange(m):
             alnmtx[i][j] = similarity(dicseq[i], dicseq[j])
-    alnmtx = regularizesim(alnmtx, minzero=True, expflag=False)
+    alnmtx = regularizesim(alnmtx, normalflag=True, expflag=False)
     return alnmtx
 
 

@@ -85,21 +85,6 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     serumindex = readdata.readserumindex(fn_hi)
     ratings = np.load('ratings.npy')
 
-    # create train, validation and test sets.
-    n = int(ratings.shape[0] * 0.8)
-    train = ratings[:n]
-    test = ratings[n:]
-    v = int(train.shape[0] * 0.9)
-    # split train to 1(validate) : 9(training)
-    val = train[v:]
-    train = train[:v]
-    from rsvd import RSVD
-    dims = (len(virusindex), len(serumindex))
-
-    """
-        get the average score
-        NMF
-    """
 
     """
     Cache date check and get simtx from cache
@@ -115,6 +100,23 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
 #    else:
 #        simtx = np.load("simtx_minority.npy")
     print("simtx_minority calculated!")
+
+
+    # create train, validation and test sets.
+    n = int(ratings.shape[0] * 0.8)
+    train = ratings[:n]
+    test = ratings[n:]
+    v = int(train.shape[0] * 0.9)
+    # split train to 1(validate) : 9(training)
+    val = train[v:]
+    train = train[:v]
+    from rsvd import RSVD
+    dims = (len(virusindex), len(serumindex))
+
+    """
+        get the average score
+        MF
+    """
 
     model = RSVD.train(LATENTDIM, train, dims, simtx,
                        probeArray=val, esflag=esflag, maxEpochs=1000,
