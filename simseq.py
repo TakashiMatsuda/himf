@@ -5,6 +5,8 @@ import readdata
 import numpy as np
 from Bio.Emboss.Applications import NeedleCommandline
 import scipy as sp
+from multiprocessing import Pool
+from scipy import stats
 
 
 def _dicseq(f, idx):
@@ -60,7 +62,7 @@ def parse_getscore(fn):
     return float(score)
 
 
-def similarity(x, y):
+def similarity(x, y, loopnum):
     """
     Return: The Alignment score between x and y, those are amino acid sequences
     """
@@ -70,21 +72,21 @@ def similarity(x, y):
     It doesn't accept the string.
     I create new files for each x and y sequence that are in the file.
     """
-    f_x = open(".simseq_x.fa", 'w')
+    f_x = open(".simseq_x_{0}.fa".format(loopnum), 'w')
     f_x.write(">x\n{}".format(x))
     f_x.close()
-    f_y = open(".simseq_y.fa", 'w')
+    f_y = open(".simseq_y_{0}.fa".format(loopnum), 'w')
     f_y.write(">y\n{}".format(y))
     f_y.close()
 
-    needle_cline = NeedleCommandline(asequence=".simseq_x.fa",
-                                     bsequence=".simseq_y.fa",
+    needle_cline = NeedleCommandline(asequence=".simseq_x_{0}.fa".format(loopnum),
+                                     bsequence=".simseq_y_{0}.fa".format(loopnum),
                                      gapopen=10,
                                      gapextend=0.5,
-                                     outfile=".simseq_needle.txt",
+                                     outfile=".simseq_needle_{0}.txt".format(loopnum),
                                      auto=True)
     needle_cline()
-    return parse_getscore(".simseq_needle.txt")
+    return parse_getscore(".simseq_needle_{0}.txt".format(loopnum))
 
 
 def regularizesim(alnmtx, normalflag, expflag):
@@ -98,7 +100,7 @@ def regularizesim(alnmtx, normalflag, expflag):
     minzero -> expflag
     """
     if normalflag:
-        alnmtx = sp.stats.zscore(alnmtx, axis=None)
+        alnmtx = stats.zscore(alnmtx, axis=None)
     if expflag:
         alnmtx = np.exp(alnmtx)
     return alnmtx
@@ -117,7 +119,41 @@ def simseq(idx, f):
     for i in xrange(m):
         print("calculating simtx.... "+str(i)+" in "+str(m))
         for j in xrange(m):
-            alnmtx[i][j] = similarity(dicseq[i], dicseq[j])
+            alnmtx[i][j] = similarity(dicseq[i], dicseq[j], i*m + j)
+    alnmtx = regularizesim(alnmtx, normalflag=True, expflag=False)
+    return alnmtx
+
+
+def argwrapper(args):
+    return args[0](*args[1:])
+
+
+def simseq_parallel(idx, f):
+    """
+    Parallel processing for simseq
+    Return : Numpy.ndarray(2d)
+    File x Index -> Alignment Score Matrix
+    idx : dict, (NCBI strain name : ID)
+    f : File Object pointing the fasta file
+    """
+    dicseq = _dicseq(f, idx)
+    m = len(dicseq)
+    alnmtx = np.zeros((m, m))
+    for i in xrange(m):
+        print("calculating simtx.... "+str(i)+" in "+str(m))
+
+        ds_first = [dicseq[i]] * m
+        loopnum_list = [x + i * m for x in range(m)]
+
+        func_args = [(similarity, dicseq[i], dicseq[j], i * m + j for j in range(m))]
+        p = Pool(4)        
+        alnmtx[i] = p.map(argwrapper(func_args))
+
+
+        alnmtx[i] = p.map(similarity, ds_first, dicseq.values(), loopnum_list)
+        p.close()
+        p.join()
+
     alnmtx = regularizesim(alnmtx, normalflag=True, expflag=False)
     return alnmtx
 
@@ -144,4 +180,15 @@ def test_simseq():
     idx = readdata.readvirusindex('./test_HI.csv')
     res = simseq(idx, f)
     f.close()
+    print(res)
+
+
+def test_simseq_parallel():
+    f = open("./test.fa")
+    idx = readdata.readvirusindex('./test_HI.csv')
+    res = simseq(idx, f)
+    f.seek(0)
+    res_parallel = simseq_parallel(idx, f)
+    f.close()
+    assert (res == res_parallel).all()
     print(res)

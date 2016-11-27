@@ -1,3 +1,3 @@
 {
-  "simseq.py::test_simseq": true
+  "simseq.py::test_simseq_parallel": true
 }
