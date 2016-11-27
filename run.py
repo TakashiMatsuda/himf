@@ -27,7 +27,7 @@ if __name__ == '__main__':
         for latentdim in klist:
             for reg in reglist:
                 for nmfflag in nmflist:
-                    p = Pool(4)
+                    p = Pool(3)
                     maphimf = functools.partial(himf._himf,
                                                 latentdim,
                                                 reg,
