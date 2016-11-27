@@ -145,12 +145,11 @@ def simseq_parallel(idx, f):
         ds_first = [dicseq[i]] * m
         loopnum_list = [x + i * m for x in range(m)]
 
-        func_args = [(similarity, dicseq[i], dicseq[j], i * m + j for j in range(m))]
+        func_args = [(similarity, dicseq[i], dicseq[j], i * m + j) for j in range(m)]
         p = Pool(4)        
-        alnmtx[i] = p.map(argwrapper(func_args))
+        alnmtx[i] = p.map(argwrapper, func_args)
 
-
-        alnmtx[i] = p.map(similarity, ds_first, dicseq.values(), loopnum_list)
+        # alnmtx[i] = p.map(similarity, ds_first, dicseq.values(), loopnum_list)
         p.close()
         p.join()
 
@@ -191,4 +190,3 @@ def test_simseq_parallel():
     res_parallel = simseq_parallel(idx, f)
     f.close()
     assert (res == res_parallel).all()
-    print(res)
