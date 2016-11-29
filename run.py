@@ -33,7 +33,7 @@ if __name__ == '__main__':
                                                 reg,
                                                 exp_num,
                                                 nmfflag=nmfflag,
-                                                esflag=True,
+                                                esflag=False,
                                                 lr=lr,)
                     result = p.map(maphimf, gammalist)
                     print "result: ", result

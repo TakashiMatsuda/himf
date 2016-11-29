@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import numpy as np
-from runconfig import *
+from runconfig_94 import *
 
 nmf_loop_list = ["-nmf" if x else "" for x in nmflist]
 

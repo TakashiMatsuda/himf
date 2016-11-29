@@ -2,9 +2,10 @@
 # -*- coding:utf-8 -*-
 import subprocess
 
-exp_num = 94
+exp_num = 96
 """
-離散している値を取っているデータ集合に対する性能評価の実験
+離散していない値を取っているデータ集合に対する性能評価の実験
+earlystopping off
 """
 
 klist = [10, 20, 25, 30, 40, 50, 100]

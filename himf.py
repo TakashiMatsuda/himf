@@ -15,54 +15,11 @@ import os
 
 
 def randomizedata():
-    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data_majority.csv'
+    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data_minority.csv'
     ratings = readdata.readHIdata(fn_hi)
     # make sure that the ratings a properly shuffled
     np.random.shuffle(ratings)
-    np.save('ratings_majority.npy', ratings)
-
-
-# def _himf_rt(LATENTDIM, REG, nmfflag, gamma):
-#     """
-#     deprecated function
-#     """
-#     fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data.csv'
-#     virusindex = readdata.readvirusindex(fn_hi)
-#     serumindex = readdata.readserumindex(fn_hi)
-#     ratings = np.load('ratings.npy')
-
-#     # create train, validation and test sets.
-#     n = int(ratings.shape[0]*0.8)
-#     train = ratings[:n]
-#     test = ratings[n:]
-#     v = int(train.shape[0]*0.9)
-#     # split train to 1(validate) : 9(training)
-#     val = train[v:]
-#     train = train[:v]
-#     from rsvd import RSVD
-#     dims = (len(virusindex), len(serumindex))
-
-#     #  get the similarity score
-#     seq_date = os.stat("./realdata.fa").st_mtime
-#     simtx_date = os.stat("./simtx.npy").st_mtime
-#     if simtx_date <= seq_date:
-#         fsim = open("../realdata.fa")
-#         print("realdata.fa is renewed. updating simtx.npy..")
-#         simtx = simseq.simseq(virusindex, fsim)
-#         np.save("simtx.npy", simtx)
-#     else:
-#         simtx = np.load("simtx.npy")
-
-#     model = RSVD.train(LATENTDIM, train, dims, simtx,
-#                        probeArray=None, maxEpochs=500,
-#                        learnRate=0.001, regularization=REG, nmfflag=nmfflag,
-#                        randomNoise=5.,
-#                        gamma=gamma)
-
-#     reslist = []
-#     for strainID, serumID, rating in test:
-#         reslist.append([rating, model(strainID, serumID)])
-#     return reslist
+    np.save('ratings_minority.npy', ratings)
 
 
 def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
@@ -80,25 +37,25 @@ def _himf(LATENTDIM, REG, EXPERIMENTNUM, gamma,
     lr: learning step size of SGD
     esflag : Early stopping applied if it is True
     """
-    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data_majority.csv'
+    fn_hi = '../H3N2_HIdata/H3N2_integrated_/H3N2_HI_data_minority.csv'
     virusindex = readdata.readvirusindex(fn_hi)
     serumindex = readdata.readserumindex(fn_hi)
-    ratings = np.load('ratings_majority.npy')
+    ratings = np.load('ratings_minority.npy')
 
 
     """
     Cache date check and get simtx from cache
     """
-    seq_date = os.stat("./realdata_majority.fa").st_mtime
-    simtx_date = os.stat("./simtx_majority.npy").st_mtime
+    seq_date = os.stat("./realdata_minority.fa").st_mtime
+    simtx_date = os.stat("./simtx_minority.npy").st_mtime
     if simtx_date <= seq_date:
-        fsim = open("./realdata_majority.fa")
-        print("making simtx_majority.npy..")
+        fsim = open("./realdata_minority.fa")
+        print("making simtx_minority.npy..")
         simtx = simseq.simseq_parallel(virusindex, fsim)
-        np.save("simtx_majority.npy", simtx)
+        np.save("simtx_minority.npy", simtx)
     else:
-        simtx = np.load("simtx_majority.npy")
-    print("simtx_majority ready!")
+        simtx = np.load("simtx_minority.npy")
+    print("simtx_minority ready!")
 
 
     # create train, validation and test sets.
